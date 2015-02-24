@@ -27,6 +27,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.*;
 import com.afollestad.materialdialogs.MaterialDialog;
 import de.ip.mapradar.R;
+import de.ip.mapradar.apputil.GooglePlacesActivity;
 import de.ip.mapradar.main.MapApplication;
 
 import java.util.*;
@@ -263,7 +264,7 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
         mNavDrawerItems.clear();
         mNavDrawerItems.add(NAVDRAWER_ITEM_HOME);
 //        mNavDrawerItems.add(NAVDRAWER_ITEM_EVENTS);
-//        mNavDrawerItems.add(NAVDRAWER_ITEM_SEARCH);
+        mNavDrawerItems.add(NAVDRAWER_ITEM_SEARCH);
         mNavDrawerItems.add(NAVDRAWER_ITEM_FAVORITES);
         mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR);
         mNavDrawerItems.add(NAVDRAWER_ITEM_HELP);
@@ -379,9 +380,10 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
 //            case NAVDRAWER_ITEM_EVENTS:
 //                intent = new Intent(this, EventsActivity.class);
 //                break;
-//            case NAVDRAWER_ITEM_SEARCH:
+            case NAVDRAWER_ITEM_SEARCH:
 //                intent = new Intent(this, SearchActivity.class);
-//                break;
+                intent = new Intent(this, GooglePlacesActivity.class);
+                break;
             case NAVDRAWER_ITEM_FAVORITES:
                 intent = new Intent(this, FavouritesActivity.class);
                 break;

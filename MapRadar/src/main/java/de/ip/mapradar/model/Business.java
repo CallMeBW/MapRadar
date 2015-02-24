@@ -66,7 +66,7 @@ public class Business implements Serializable {
         this(category, categoryID, business, null);
     }
 
-    private Business(String[] values) {
+    public Business(String[] values) {
         this.id = values[0];
         this.address = values[1];
         this.name = values[2];

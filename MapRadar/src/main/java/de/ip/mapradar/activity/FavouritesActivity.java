@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.*;
 import android.view.View;
 import de.ip.mapradar.R;
-import de.ip.mapradar.apputil.YelpQueryHelper;
 import de.ip.mapradar.main.MapApplication;
 import de.ip.mapradar.model.Business;
 
@@ -17,8 +16,6 @@ import java.util.ArrayList;
  * Description:                    <br>
  */
 public class FavouritesActivity extends BaseActivity implements FavsAdapter.OnItemClickListener {
-    YelpQueryHelper helper;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
