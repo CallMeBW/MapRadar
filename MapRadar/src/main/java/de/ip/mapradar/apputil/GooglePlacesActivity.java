@@ -7,7 +7,7 @@ import de.ip.mapradar.activity.*;
 import de.ip.mapradar.androidutil.AndroidUtil;
 import de.ip.mapradar.model.Business;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * <code>
@@ -36,7 +36,6 @@ public class GooglePlacesActivity extends BaseActivity implements FavsAdapter.On
         recList.setHasFixedSize(true);
         GridLayoutManager llm = new GridLayoutManager(this,getResources().getInteger(R.integer.favs_grid_col_count),GridLayoutManager.VERTICAL,false);
         recList.setLayoutManager(llm);
-        final ArrayList<Business> favourites = new ArrayList<>(0);
 
         new AndroidUtil.VoidAsyncTask(){
 
@@ -47,7 +46,7 @@ public class GooglePlacesActivity extends BaseActivity implements FavsAdapter.On
 
             @Override
             protected void onPostExecute() {
-                FavsAdapter ca = new FavsAdapter(favourites,GooglePlacesActivity.this);
+                FavsAdapter ca = new FavsAdapter(new ArrayList<Business>(Arrays.asList(businesses)),GooglePlacesActivity.this);
                 recList.setAdapter(ca);
             }
         }.run(false);

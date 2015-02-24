@@ -52,7 +52,7 @@ public class GoogleQueryHelper {
             values[11] = "74613";
             values[12] = "DE";
             values[13] = ((int) p.getRating()) + "";
-            values[14] = p.getDetail().getReviews().size() + "";
+            values[14] = detailNull ? "0" : p.getDetail().getReviews() == null ? "0" : p.getDetail().getReviews().size() + "";
             values[15] = "";
             values[16] = "restaurant";
             values[17] = "2";
