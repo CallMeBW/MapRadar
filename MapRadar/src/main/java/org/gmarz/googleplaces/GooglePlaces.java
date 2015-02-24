@@ -1,27 +1,14 @@
 package org.gmarz.googleplaces;
 
-import java.io.IOException;
-import java.util.AbstractSet;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.*;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.*;
+import org.gmarz.googleplaces.models.*;
+import org.gmarz.googleplaces.query.*;
+import org.json.*;
 
-import org.gmarz.googleplaces.models.DetailsResult;
-import org.gmarz.googleplaces.models.PlacesResult;
-import org.gmarz.googleplaces.query.DetailsQuery;
-import org.gmarz.googleplaces.query.NearbySearchQuery;
-import org.gmarz.googleplaces.query.Query;
-import org.gmarz.googleplaces.query.SearchQuery;
-import org.gmarz.googleplaces.query.TextSearchQuery;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.IOException;
+import java.util.*;
 
 public class GooglePlaces {
 
@@ -45,13 +32,10 @@ public class GooglePlaces {
 			}
 		}
 		
-		if (keyword != null && keyword != "") {
+		if (keyword != null && !keyword.equals("")) {
 			query.setKeyword(keyword);
 		}
-		
-		PlacesResult result = getPlaces(query);
-		
-		return result;
+        return getPlaces(query);
 	}
 	
 	public PlacesResult getPlaces(List<String> types, int radius, double lat, double lon) 

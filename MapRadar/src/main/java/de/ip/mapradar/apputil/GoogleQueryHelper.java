@@ -3,6 +3,7 @@ import android.app.Activity;
 import de.ip.mapradar.model.*;
 import org.gmarz.googleplaces.GooglePlaces;
 import org.gmarz.googleplaces.models.*;
+import org.gmarz.googleplaces.models.GBusiness;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -24,17 +25,17 @@ public class GoogleQueryHelper {
         PlacesResult result = null;
         try {
             GooglePlaces googlePlaces = new GooglePlaces(API_KEY);
-            result = googlePlaces.getPlaces("food", 5000, 40.764941, -73.984886);
+            result = googlePlaces.getPlaces("food", 5000, 49.199931, 9.502949);
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
         if (result == null) {
             return new Business[0];
         }
-        List<Place> places = result.getPlaces();
-        Business[] ret = new Business[places.size()];
+        List<GBusiness> GBusinesses = result.getPlaces();
+        Business[] ret = new Business[GBusinesses.size()];
         for (int i = 0; i < ret.length; i++) {
-            Place p = places.get(i);
+            GBusiness p = GBusinesses.get(i);
             String[] values = new String[19];
             boolean detailNull = p.getDetail() == null;
 

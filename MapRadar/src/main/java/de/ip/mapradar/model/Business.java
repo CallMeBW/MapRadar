@@ -19,7 +19,11 @@ public class Business implements Serializable {
             postalCode, countryCode, subCategory, subCategoryID, category, categoryID;
     public double
             LONGITUDE, LATITUDE, RATING;
-    public final long reviewCount;
+    public long reviewCount;
+
+    public Business() {
+
+    }
 
     public Business(final String category, final String categoryID, final JSONObject business, JSONObject region) {
         final JSONObject location = (JSONObject) business.get("location");

@@ -1,0 +1,607 @@
+{
+   "html_attributions" : [],
+   "next_page_token" : "CoQC8gAAALMZ51EVWzaj1eVifUmXn92d8jiHy5YN0RfcGV0tj8BklMPtSH54xyFx0hncOQLuQzDX8MgSqGwKBBy5sL2hNsR5SIPTcFD6GaDRyGIq4Sdo8woLdEQQnW-sq-3J0LVPB8uqXrKBzRapa_EpVxrTOOuA9bcAhe1FBwvRLqEdDdt1-Om1ZPXVCY7Fm0HFczfxZyLP0cJWjF_esIUbN4y4fXKP7RAzow77JLJ4eX7g3vwE8f2h-7hyaRnacFVN8JGEZWv5XdpLBR7f0TCWtfWf6NW34LbgApYgERMHI6_GUfplaHoC5DIPzXbdjRCxheb7K1-grmgty78PZBC11Q0VXUwSEFauDviWxb-K1Eb5Qv8dVaEaFK81U_RDj98opAXTIwFx5U_aNMjS",
+   "results" : [
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.764149,
+               "lng" : -73.981284
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "cbc8bb5086c6178fe92a5b03b8a63c25da17b123",
+         "name" : "Carnegie Deli",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 429,
+               "html_attributions" : [],
+               "photo_reference" : "CnRpAAAAK1--7rh-QB6fAfUGu6krLFRAHyUTGvfjDdgPS0-F0aQu9H9eW7AE9gURMs39FkKoWHjAojsvrVEHjJNH4J9l8PqKiQkpRvyYLyW9hkYM_rd7QNMIKwcpQIB1InTJafhxXfdQw9u6OLIBXJ9R4tCGQxIQ5Z98CJMyzP26-gqW8kFgUxoUAgr5HYpLoXfY4u4D-VPq1l7uJ2w",
+               "width" : 429
+            }
+         ],
+         "place_id" : "ChIJN_HDIvhYwokRBWuxymsFuGQ",
+         "price_level" : 2,
+         "rating" : 3.6,
+         "reference" : "CmRgAAAAeYB6yGjUfSif8Xlim54P7DVwCU3FPd5n8XnOWsJXvdEvbZZVUsmcwLQO4aT0_lOybPLsCYGfPiCul743Jpbj7dloMgUw-sQeaLzKJz_0IgvMWC-91g4MLJTCTv6YZmuzEhD7dU1EhHiN-lFj6563lQNwGhQj-ahJwSckyYaolncqyAoX2xYqeA",
+         "scope" : "GOOGLE",
+         "types" : [ "food", "store", "establishment" ],
+         "vicinity" : "854 7th Avenue, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.759032,
+               "lng" : -73.989655
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "fe35759ac2c4adda951e60ea9f7a911031f1c9a8",
+         "name" : "Birdland Jazz Club NYC",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 177,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAA1TYk0VE_UfF0sREUOPIDHLAAfKiF_lxwfNvNFieXDjsFE91pW8N-bFvrNjR8r57f30wv4qFzs-l50ywUyhyFaHdujakuhz0359qv6Pp_-xefyxgQZhtRcMlaVYyAYlK0fsVbV9TDseJianRh6T0igxIQO8mZYyU7apZQxb735FPUBBoUrYidylV4DGuWRBMYGHaPkwVHa_U",
+               "width" : 238
+            }
+         ],
+         "place_id" : "ChIJdc9EhVNYwokR-naSYfm_Urc",
+         "price_level" : 3,
+         "rating" : 4.3,
+         "reference" : "CnRqAAAAVBVks4tdqIWEfeABvBk7f7KdIuLAVDxdeqL7IcwrAmuKXao2w24SVJ7ZnndHYJN3t2Lod7n46SUYPoYaoja4Dlbqt6JRRnjSoCo1Fkaln_ls65A7RqceZntepMjhpaAfUTfzJIro5EKnf9LDvVSSqxIQWuaLdHLx0H6V057SGoyWYBoU4tbgbP43SJzFL_uLrl5JmFPv0ss",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "315 West 44th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.760492,
+               "lng" : -73.97746100000001
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "5d08e57330ecc48a64e63ddd5bc0ba93ffad577a",
+         "name" : "21 Club",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 2844,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAf3U0Ign3xSS2y0M63ek0PkFqtcSKcUAMBxRx3CNH_3SGh-6S93oxjFJcH9TAirnqL2y1p0yN-y06O-h7FqbAoIhHccb6uY-BWMQUw9AUQMmMDavBuubunTzp-jc977jC86As5CXewuxtebbf5C6KZBIQJiZgLeed5yeXpguuJYOEdBoUjjEgWqvCBMDoBQ9KESeM9k-WpiM",
+               "width" : 1600
+            }
+         ],
+         "place_id" : "ChIJpZepXflYwokRNuSe6xAwprw",
+         "price_level" : 4,
+         "rating" : 4.1,
+         "reference" : "CmRbAAAAiN7EZhNrmPfWdHMCFvcXooTnhY1CNuwNd7MuXowDboK9oxAqFFnHykbrfmaEVyrvQN-eDSm0O1JKVbRXwR1a_DUlEmIGM9bh2pTl0GaY0FyxTDn6QcpVS2SdVGy4OhCyEhAgYLFxMHf8hAEQlhsCAnLgGhRPhbEsFUQ5ZmhLdcF9iBas-DVmwA",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "21 West 52nd Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.764908,
+               "lng" : -73.97949300000001
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "83b9140a811288f44ebb1255fe42da16b0c95c1d",
+         "name" : "The Russian Tea Room",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 500,
+               "html_attributions" : [],
+               "photo_reference" : "CnRpAAAA2r5S1AAYwii9aQgHmiBr2gz01Awc6EInDEGCKXHgZ25HQgys304LkXyBukBrHVZAtHlFH9TAnjsSwbHr0sVuWJ23XCPL7LyImDrvMGxAuFqe7UCjYFS8LzFl87dqsdDJvCsNsaGPpUI6tsvcgo5l0hIQy-PJKgvYf61peP4Bqm1NKxoU02l2pLsZWOfAqnjYfJ3CK63nzJY",
+               "width" : 960
+            }
+         ],
+         "place_id" : "ChIJ_816e_dYwokROMvaQpsyemk",
+         "price_level" : 3,
+         "rating" : 3.8,
+         "reference" : "CnRnAAAABBl_597Cxhi4M7cYt_eR4Cc0l2CGGPzjYzWaJVg24bkkwGDik6waGEZK_TsqN8k9CiH_KVNYZx8vZDTUynRw3-6B9Y5p5GgI9Nn5k9v9o8DfzW4-lAUn3jGRtClA1r3O15wEgwRDkbZ5Se9WbqdCgRIQx1lJtH8Yv123S4Je4zcLFhoU0ezb_pwOHh3RrgkmHWZ1czMFCkc",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "150 West 57th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.761899,
+               "lng" : -73.96485800000001
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+         "id" : "08de016296044a39f5ed074edb14503a956d7e21",
+         "name" : "SERENDIPITY 3",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1280,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRoAAAA-fkBIdcO2OBc9iemTRxYy-mMmEa9qBu0rxFB5JLA0lwOCRYyS81E9Lb-PGXI0Y6bkZ-hzMEQE_V32Wo4-QZxurP3PeBj-Id3DVgid8qdH0Rh3FcIJQg1xCcR2FQ7nD3Cb73P-N4gymJs5Wal2SJiuRIQrSbi8uZBIf2-9KjPdXC74RoUaf0XCKRFUXBanDlawmqQZtilTag",
+               "width" : 691
+            }
+         ],
+         "place_id" : "ChIJK3zOCOZYwokRnbBok8ubIOs",
+         "price_level" : 2,
+         "rating" : 3.6,
+         "reference" : "CnRhAAAAUVby1K1fM9Qnd0xES61Hjmg4FV0mpivj77ic3H-yB0t062kxH35lQktZn2rLepspR0aMuX3HxnAS7_uUsJXrjFnHCU3vmjMYT2F6FBHzWEDd4hA8adSB0_nuWEh3sXkde_XRDfHWYZTQXO7I7pe-uRIQDETJzUPNgN_aYUt9DduoPBoU_qoOOfLSBWaWIZyuOgunQMdJlPE",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "establishment" ],
+         "vicinity" : "225 East 60th Street, Newyork"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.752038,
+               "lng" : -73.977737
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/cafe-71.png",
+         "id" : "4394bb8203cbc3312b1c04087fdbe5b2cf90678c",
+         "name" : "Pershing Square",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 638,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAA0hddopI7dO1cDxJVtC2sexwjTAyeheebYu0MvC7d4t5te0PdXaUTzsxIgVwIpKMrsoSIXWisj7uweSp7OF3-5Sb235MDKMPQoNECUU_bTvfSfA9bUl4psQKbmvUwq6yZLmifddGNO6HuqV8spXXgnxIQ2k38fcpTNrfffC7_dMOMWRoUcVvFxG3eOwaFjzOXNJbX0l2HgW4",
+               "width" : 1081
+            }
+         ],
+         "place_id" : "ChIJBRoSgwFZwokRUSh30OTrJ6A",
+         "price_level" : 2,
+         "rating" : 3.6,
+         "reference" : "CnRjAAAA18HV6hgryBxlCjZll-iFXaeanqZrcBDC-aX-6_Hmi4f7221axjT9ItDxtAw7t0IrtOqHHlC7SXsxcwaNpv2yHzmEjiXGXPTD15Iuij9dafsKxJqi9e8A3sA5SCD_V9X9giuYuElXibNt1B_QSOEBchIQULcIpLysx-U1IpNJY0ly-BoUvFwy0IFHAKqoQv_KCJJI1ja7Lbg",
+         "scope" : "GOOGLE",
+         "types" : [ "cafe", "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "90 East 42nd Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.768352,
+               "lng" : -73.983198
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "37c516575be01a32ba25362a2ca116578eca3ef0",
+         "name" : "Per Se",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 3264,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRlAAAAuUXRpQYGHarTiptjW2_uF0dnpC9ZRgM_Cft26asYVwErxmIhF1zozdRA3B7FVptiNOaXb9Ko8WugK6CJ4h6LnLpO-OPHJ4xWZiR2Aa_Vxq3C13ES67dgyo8l5j4dHxBccED_lrTYtPXF4JZjlXE7thIQsV6aUwfGfnzYU3mC7T6KLhoUdNHtHDUR52PQelW7egUASKl8bCA",
+               "width" : 2448
+            }
+         ],
+         "place_id" : "ChIJp3PsL_ZYwokRZYqs_40RJF4",
+         "price_level" : 4,
+         "rating" : 4.6,
+         "reference" : "CmRZAAAAzN7nJZnb7funCaWWuVsQ1YpZg6Ymu0F12kXtP_GSTYJQZ_5CiMl5oq-PydTX6JtCmUFyJuyUrS0AzujbV6Hx-z8pHoA3TwG5YX390hfjipJmeyOMcR3eSQX89-OdVyzkEhBXz5x1yd9SsIcnPwSDpjqaGhQtWIiZdT77ezc7UMZnxQo3YwsNFA",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "4, 10 Columbus Circle, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.760276,
+               "lng" : -73.984348
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+         "id" : "bd8be5cf66986f2f833e52c9b33e819008e4021e",
+         "name" : "M&M'S World",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1296,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRoAAAA1G1CweeJOikvHiElY7DszpR8xSBE9vMmJ8Ud_Qii8m2x17Rkw0bqqYZNYV9kf7AHUKp-1ooU88ak17JYfwZQ2fFg7sb1r6ZFkUuCn0pdfIU9Ja_rF6NPD-cBZp10vQiH_OMHOy-rihsNw71osToI-hIQ4UoNvIOjPRBVNGSvhFm-shoUUKPd_xe6k2BciOUjcJg9KpbiUok",
+               "width" : 972
+            }
+         ],
+         "place_id" : "ChIJHfPuClZYwokRP2wzLQjhuEI",
+         "price_level" : 2,
+         "rating" : 4.1,
+         "reference" : "CmReAAAAuDMUO5bkJtt6OtTgi84rUHbb6iOx1TNyQy7umMd26rNMIPSUU8ruM9D5_akAkEGGoVdoqJl0ARHgPeVkWewxqhr6YLxit-aBfJm82lXZ5Uv7PT8_p9FXzSctr9Ex8a0MEhCSCaUpQRjVWFJM4tSnPjVAGhQgwO2nOzka53JcdK8QkyREboBKKQ",
+         "scope" : "GOOGLE",
+         "types" : [ "food", "clothing_store", "store", "establishment" ],
+         "vicinity" : "1600 Broadway, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.752486,
+               "lng" : -73.977423
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "7f2984318c76fe710711493223ea7819a357a1b0",
+         "name" : "Grand Central Oyster Bar & Restaurant",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 640,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAZMxF8XkbM-uIA33_ZZbR0Iod8gafMpugrxFiMAxpnMsNwfyjzR2ft9-4JMuC7PXrD7JM0vQyaVImikFMOWwXT_DZNqTYPs8zZAx3HGvqnoPzLY74nlxi0SxOE9Vs9yKHwRsdUdcgrSATjRueUqQr7hIQBTAesuAP01lLnqXFvLFTWxoUFduvf7H3S2-ckcD9qKCxiqPJ-ZI",
+               "width" : 960
+            }
+         ],
+         "place_id" : "ChIJR9legAFZwokRa1s5gcFXPZw",
+         "price_level" : 3,
+         "rating" : 3.7,
+         "reference" : "CoQBeQAAAEj2pDk9NkyX8KrkdUept_ZGo00KYzrhCCp4ZiFL-dEoXISsnlPZnsJ1WkV66A6PFvikBvXFjwCowkeUDbOOwin0-64CC4G44sxL-zNvk77Y2tgrxk6kaqteDCBcggiv2tgvROZtDHmNBzhSRRGTfagIMJK5b9UM-TEbN1XQ1g33EhAnefJ1NukvC0o3LHwCPSE9GhQJVlJl4l3rBjCkvIlh4OJgYkITRA",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "89 East 42nd Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.766729,
+               "lng" : -73.96760500000001
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "0fcae36cae92d503d097a515746e4700e021995a",
+         "name" : "Daniel",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 395,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAoUGssSmi3riChKSzNPI5drMYd-mSwA-qEubCcqq_rkhnmgPmFPgzNyLmgaw8YOIgzRfmls7mCPuQHoutP9NQEmjEHXD2wK4Q8oYNmTSbVDTXdeNOVyA8VK11C6K9AJKBQ3PgNoBICqOEk-Gc9OWLuxIQvpkqM8mQsHXqUwFZQBf_ABoUwa0hWoqqfXAIMdF_-3qa7TK8BcI",
+               "width" : 527
+            }
+         ],
+         "place_id" : "ChIJ09ZGju5YwokRXOcNC23JRwk",
+         "price_level" : 4,
+         "rating" : 4.7,
+         "reference" : "CmRZAAAAKRVcn5R51ykOVQyFrJQ2jImyoG28QlHxlnbm8qVMRz4iildE7xrXSOJKY3TCAjFYCndEn_g16Ooe7htaB88kuNWjaJT0rur9jlMUroPr4DZecqSMOtCgn5cXMJIDSKjoEhBsTkgt7ACn_06r9yhL7l4zGhQqww5izCoba4h-_3uF163L6RZ6fw",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "60 East 65th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.761568,
+               "lng" : -73.98187
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "ad0a76f04ef4567ae3420ffa1881057b1f8180a7",
+         "name" : "Le Bernardin",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 2000,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRmAAAAvkiluAs_5Fskv1OXyYQDYnZ3GY1b-wE7CHW0ZvSxCXRMQMZEDars_Zw_JV4lXIBqNvhX-wO-re2kFqv5N60rReduP0CgrhCjHIeW8amNpfeS_xPTbW8mWj0nxHyDj62LZlnn_pOt7PT31MAr8xltexIQtksz7RBeK6357nmloKMZ2RoUmNj1aYS-FCLOAqLGEm480WKdfGo",
+               "width" : 1333
+            }
+         ],
+         "place_id" : "ChIJVSKXkPhYwokRVgXdrRfFxh0",
+         "price_level" : 4,
+         "rating" : 4.7,
+         "reference" : "CmRfAAAAEV85toyY2rbJBRHWXQtSVmSaml_7AIFg4GpX4QyJ2NsWZXPNTqLPej94c_mr37MAH4aj5xCqVfo0nTqiexoi4OZzxABj4pLK-jLK4_bM3VdRO7_vppupE9cckK801pT4EhBmnRxIZlnWRl4iSymxw5wLGhRdS2YVUJ_JFqYoejaUe6UXn_P6Xw",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "155 West 51st Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.756571,
+               "lng" : -73.984696
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "7676aa94e3431081c7abd18f84b12ca6bcf532e5",
+         "name" : "The Lambs Club",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1280,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAt4pzT2O9jYp85Wy4AIzJsE29DQONgU9ErAeJqfLAlX5aynxolsX8ZQXeCCqGn6qtChVViZWCm-3W9UxIJqWOA4h243Cb_NHbwrqvgDIxnJMCBQu1eIyGSfOD-21rGP9fgQCTaLtFLLNDJXcSpXgnRBIQ-kCaAHLs3m_cunzyD2qEeBoUGYYo3wRNQsoi-Lo2QyEnqKYHNzQ",
+               "width" : 851
+            }
+         ],
+         "place_id" : "ChIJu0soFVVYwokRArPqt2VGdJs",
+         "price_level" : 3,
+         "rating" : 4.1,
+         "reference" : "CnRiAAAAyDsBqVqa-4aXbX-9PaWzhTjLloomEeaOZpdk1Hre3JEuRHv5WedqfdxdYpvjo8SDMgR3Pf5JQPj2hRYLAD9-24OzVNB_DPxZ2xl3eAgg7Pdf4eRRAnoBE6tEqBXxIGkBLcoGOIfRR4yJVgjcEPxUcxIQLFNu16qnD2OD9Jxew4wCQRoU55ZPX--bjZwImAnG8THSLiNL4AY",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "132 West 44th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.751695,
+               "lng" : -73.97116699999999
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "18b9fa234c9b8a7ce549dbb01ae07881cda7f90a",
+         "name" : "The Palm Restaurant",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1117,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAsfPHUH_S20Yg76fwNB294Nz3gq-t4u6qrR8QYAlRLBwO0xwOBD1G6Du8aLSCdcb8etNMrQVrynxZyavIgXfYQ1cfrnU17U-7vRKENmd4jgeMWgX5euGlGqL0bEV6n_qvanvhDuDQAz2jObEMau8FrRIQQFbA9A8l1GdzK6J1v1aOwhoUxZ29D7BsCRNBvYejcR3wfF1eHNM",
+               "width" : 1280
+            }
+         ],
+         "place_id" : "ChIJtRzaMh1ZwokR8EFQw2PPiMs",
+         "price_level" : 3,
+         "rating" : 4.1,
+         "reference" : "CnRnAAAAzOzBMasyp-47ggvnqsOsRSTodo2b7zvCH6fRT8EozcoP-URWXHTed8tfFMVumEyX0fcl9h5A3TkYQTSXVQF2a-niDpy4ltQWeRmt5JFrKWh5Sl6GvZzHTPJl2tnQcreZfOrLlGqlAYmojB9f0e2UoRIQSV6M_fyocD82TtVNMqieZxoUvHL-Fk2Jls4Gsh-TF4rlc0YpC50",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "837 2nd Ave, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.760876,
+               "lng" : -73.97199999999999
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "74810cd0898751b001f3fd02d270e1b3e341e86b",
+         "name" : "Aquavit",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 853,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAA2ywz2fgS7TRIQgR8qruurXXgr3X4moYro5MaScjm73W4H5jeEl7ZONo7v1g9xiCSNgBIMcVyD4MWTdSuULUwBArrjCKKxgARZbqVM1_nR_Xeb0GGACS-7eduvfm4mGtNWRlXyM6LKADvq4QzCYbBgBIQav3CWqnkjUMUkvdgb9yujhoUeGBevempd3rQdjz93DmfYHNEVqk",
+               "width" : 1280
+            }
+         ],
+         "place_id" : "ChIJWfonJ_tYwokRwIGb6Im403E",
+         "price_level" : 4,
+         "rating" : 4.4,
+         "reference" : "CmRaAAAAJr_uxy7fKupkegPHxYTI1x0Zn_7mIupSDBzgaWVOpGbwQ7Fksv7Us2SLBQywKfLfFZSUxEwIqNofuhXeiGkA8DQBDaUk9S8eCLOPOjFhv9OoIKv3jw1LxK5ZRTKnrAogEhC8PXup3aOJW05A71gB-QQQGhQVQ_buDAog-AHdPonlDSTGrNmQOw",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "65 East 55th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.751078,
+               "lng" : -73.97354900000001
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+         "id" : "5a3b48e1dcab47efcb328c1e8035b5f3ed692502",
+         "name" : "Sushi Yasuda",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1200,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CoQBdAAAAF7tMMGwXeftrrgqEmLIr0pkj9gwM8-pcYv-8r_pGGpc-Wshqxe8zqoi2ZfiLKTcQyT36vK175E-FUT87nauVTD1-1wsOrkDzf3XzIHjfVubGzEgxetaSGRZCTlYXzMCRe7DAL0L9dLUhq3B7vjSiu24Tx67cluZHz5KMWAR1GufEhAEgd95W2HNqr7-JtQxFsDnGhT8o_yR2XGelel0lSImaXYuuJx__Q",
+               "width" : 1800
+            }
+         ],
+         "place_id" : "ChIJ0Zb6HANZwokRnGIntPyqjLQ",
+         "price_level" : 4,
+         "rating" : 4.4,
+         "reference" : "CmRgAAAA-X6ckDAeRvv5Au-PTmGN-BgCflXSRDjj7sofrxJWhtkwZsmIlYW5FsJP_gDKxsULyEAzmu9WkfSUHsUpxQE6YOUHQBheohp1zA8e4Y01bfaEZGgE45KbdUfrHeYzTni7EhBIQxkQ30_V4OgM_N7QML5tGhQUrRbwlEsYsd2h3lSzH-WXmzwsSg",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "establishment" ],
+         "vicinity" : "204 East 43rd Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.752867,
+               "lng" : -73.972049
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "ce3506dca2811b3db5a84d9f700390ea9df187aa",
+         "name" : "Sparks Steak House",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 480,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAF7rn56J9zy7fdvwA4oiOmmkegGlISVLCwM2jiqkL-vyHpMhPRuBsw3gp-TuTq2EV82wW4kwNWQhr6V_vw_e_A0iLOfOgVWdtKXX7BytepwHA-kF0UCIt2XI2CDQQd1sGhXcfBEzH4-lqIUJyheDHdBIQtub0ceNWmUPXeDqCcxBUmRoU_AqSNKvKpCpKtdG2Z0C-hLpIPNI",
+               "width" : 640
+            }
+         ],
+         "place_id" : "ChIJY8nVpQJZwokR1SyYE-gyalA",
+         "price_level" : 4,
+         "rating" : 4.2,
+         "reference" : "CnRlAAAA3HCfJJbkQ5VRwh8FfWRSkcaIoOyimpZUAG0grX7qOS3Rvgmj40llH0hOL9Vks6EdDZwO4JtJHCE77cOEsDiL7TaxHf6YzyzBE9C8-kSN71ygFwzmCDDqNIG6-qk9O7kYSr-1l5V6AnkeGFy2XBy9LhIQU8badwqyV-RhQ-ukXPF63RoUPHS1NA6_11NOSEhE_S3eyw7SIUA",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "210 East 46th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.742975,
+               "lng" : -73.989276
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "ee956551b4f0be3b2f70c3cb8c25e470b6fcb1c2",
+         "name" : "The 40/40 Club",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1365,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAAzFmAwT-qXOjJppxgnOqfvEkSn_hBEkEJ4IxL9ZplI1ugu-k7kBWIuBOgIlG1h97dqW3cKvLf7zFWtr-fBsB80C3DAjcZA5V-UR5XyVfciRCZgfVZEtvNjEfHeHw7XLLmo0yShCv5Nf1f8QWzNLjLhIQjX6ZHGg2iXA0eb6ujbViTRoUPYR1QkQSGqBkL_dtrL-CQzCnRt4",
+               "width" : 2048
+            }
+         ],
+         "place_id" : "ChIJ-8qQJaRZwokROBJmbLfbWDg",
+         "price_level" : 4,
+         "rating" : 3.2,
+         "reference" : "CnRhAAAAblwMujgI-VqGNEydkq4UxBwKgV87UeSkhj-9tzjUN3uarrpQTa98_WaBCG3kirlNHbYJ5QFb_SOszIt2SndjSwEDZZswUc0PhKCwBeVFhTU9IMxTiQPnAoYOAmxWu4568LsFYFzVBJPOPimacP_i4hIQv1yzx5Gj0O_EDTH8KzbOZxoUn96VcAZ4ERvANd1V01Tf_lWvCDk",
+         "scope" : "GOOGLE",
+         "types" : [ "night_club", "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "6 West 25th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.750749,
+               "lng" : -73.986428
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "9095426e7922bb517291e58ca8e66e1f9f6c6cf1",
+         "name" : "Keens Steakhouse",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 497,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAA0s9l04nmYWTTrtLikyXf25UJM92tX5r1Ww6jZ3yrZnxL63UyuhNrgdS81zNkCIn9JwXAgTTHOSSuzWny3t8K2hwa8XnBxk-H9n7kifq9KXFceAy55eqIJd_3hoCKnRaeuZe0Nx9e5l9kXYWMsOMs_xIQQEzj83k46Pj0DfDtGWiv0hoUcmze33PM2ZvLB8TbfIS8Mz2M-yE",
+               "width" : 638
+            }
+         ],
+         "place_id" : "ChIJ5804KalZwokRzGll2Rm7nag",
+         "price_level" : 3,
+         "rating" : 4.5,
+         "reference" : "CnRkAAAABFVunftqMcTPGL1CbeyBN2F7_848jcSuNOMHFuFmZlgF57f38qeGkXKvloKZsOA3V_Idj5p5oNgk6AEPXQw3YH1MrvUx4aB3P-Mkdm0ezQehLD_oqRQNp0q6Eg7hDSAqEwWUdN48nxAM_vOmh1XfoxIQ9zqZ9pfgzR6BbwasiGM58xoU5jGRi43T9O8Y2CQHn6zVgZ4vhmU",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "72 West 36th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.768696,
+               "lng" : -73.983124
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "c5f0fcf606b083323340f40519ba39a51568febe",
+         "name" : "Masa",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1265,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRoAAAANpr3Q5OVByQFYpw-Cyl5c1qPl1Q75j-Bq1Sd9iojNMY9IpVFSFTFD3-s--9OTd8NOcnh1MLMyb_qre33Kw7F10u2JRwAJy-g1LcTNa9jEIPLMW4xG2zNEXPqBATdKyOsE1bIPMnKpbs_e-lK1iijyBIQ95kB9xEWGRsHn4XKrqmGYxoUOu7Ko96is3uCNUKejm0FCpKkCew",
+               "width" : 949
+            }
+         ],
+         "place_id" : "ChIJp3PsL_ZYwokRf2E_poRi-3E",
+         "price_level" : 4,
+         "rating" : 4.4,
+         "reference" : "CmRXAAAAjyM8VAj6Li1b2t_GXotp934N8Jw6beI63sFeixLv0Gk4k6svd5bnD3-xbl02zun4fcRMUJePVYYjPQgDjN9LXvJVKsk07TZjdoRBd_YgfUzqMnMhws1gyvAco560rERoEhCqpRV6oPsc3gVvfzcg0LqTGhRS87Q1qmd3XMGS2ZRgtKqAj6gGIQ",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "10 Columbus Circle, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.742296,
+               "lng" : -73.983777
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "5ca1d3e8bab32814b432b76a50c85ed36065c3f1",
+         "name" : "Jazz Standard",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 354,
+               "html_attributions" : [],
+               "photo_reference" : "CnRtAAAAQIrlRAaqB8cUiFDhgauIaX5Rk9ojZzL8OrLZxkFJxx7pSonOK8qZNvpxmvQ58kD6EsdIWe9pcgPJEF49OoIVeYMwkiiMxsgKmlF-2bTy9wXQoDKR6MHYuMfBg02BNup7OsuU0YLfqJ940kdsR2JSrBIQg8SFIRs0GPaHPcYMRqWR0hoUzBYCIB_f0RGqPdiaIQd3eUknU4s",
+               "width" : 352
+            }
+         ],
+         "place_id" : "ChIJi7JocKdZwokRtcslMUkXB_w",
+         "price_level" : 3,
+         "rating" : 4.3,
+         "reference" : "CnRhAAAARj_A7DvKUwi-OlXcYf1G7L4Y_7HD6OSL5-9EOREXbqACeF0LHMTUQRJMAMQjeE0wCHA1Fb1xGmNaFaxMi2hDU1TzK5jY7228Y8oRI6pFoXgo3uKz13sAXuauSSoGTclX_mp3LSDuxzMyMoCM0fDIlhIQYExF81jw0BGzA8HUJRUMZRoUPqFqAtxUcP5nt9OHERwPamjdQGM",
+         "scope" : "GOOGLE",
+         "types" : [ "night_club", "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "116 East 27th Street, New York"
+      }
+   ],
+   "status" : "OK"
+}
