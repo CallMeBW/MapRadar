@@ -1,0 +1,13 @@
+<android.support.v7.widget.Toolbar
+        xmlns:android = "http://schemas.android.com/apk/res/android"
+        xmlns:app = "http://schemas.android.com/apk/res-auto"
+        android:id = "@+id/toolbar_actionbar"
+        android:background = "@color/theme_primary"
+        app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"
+        app:popupTheme="@style/Theme.AppCompat.Light"
+        android:layout_width = "match_parent"
+        android:layout_height = "?actionBarSize"
+        android:elevation="4dp"
+
+        />
+        <!-- TODO elevation entfernen und nur bei Lollipop-->

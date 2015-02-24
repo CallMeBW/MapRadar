@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android = "http://schemas.android.com/apk/res/android"
+      xmlns:appc = "http://schemas.android.com/apk/res-auto"
+        >
+
+    <item
+            android:id="@+id/mnu_explore_search"
+            android:icon="@drawable/ic_tb_search"
+            appc:showAsAction="ifRoom"
+            android:title="Suche"/>
+    <item
+            android:id = "@+id/mnu_transport"
+            android:title = "@string/mnu_transport"
+            android:icon = "@drawable/ic_tb_person_white"
+            appc:showAsAction = "ifRoom">
+
+        <menu>
+            <group
+                    android:checkableBehavior = "single"
+                    >
+                <item
+                        android:id = "@+id/mnu_transport_foot"
+                        android:title = "Zu Fuß"
+                        appc:showAsAction = "never"
+                        />
+                <item
+                        android:id = "@+id/mnu_transport_car"
+                        android:title = "Auto"
+                        appc:showAsAction = "never"
+                        />
+            </group>
+        </menu>
+    </item>
+    <item
+            appc:showAsAction = "ifRoom"
+            android:icon = "@drawable/ic_tb_sort"
+            android:title = "@string/mnu_sort"
+            >
+        <menu>
+            <group
+                    android:checkableBehavior = "all"
+                    >
+                <item
+                        android:id = "@+id/mnu_sort_asc"
+                        android:title = "@string/mnu_sort_asc"
+                        appc:showAsAction = "never"
+                        />
+            </group>
+
+            <group
+
+                    android:checkableBehavior = "single"
+                    >
+                <item
+                        android:id = "@+id/mnu_sort_dist"
+                        android:title = "@string/mnu_sort_dist"
+                        appc:showAsAction = "never"
+                        />
+                <item
+                        android:id = "@+id/mnu_sort_rating"
+                        android:title = "@string/mnu_sort_rating"
+                        appc:showAsAction = "never"
+                        />
+            </group>
+        </menu>
+    </item>
+
+    <item
+            android:id = "@+id/mnu_filter_categories"
+            android:title = "@string/mnu_filter"
+            android:icon = "@drawable/ic_tb_filter"
+            appc:showAsAction = "never"
+            />
+
+</menu>
+

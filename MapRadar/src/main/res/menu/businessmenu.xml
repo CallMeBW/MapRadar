@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android = "http://schemas.android.com/apk/res/android"
+      xmlns:appc = "http://schemas.android.com/apk/res-auto"
+        >
+
+    <item android:title = "Suche"
+          android:id="@+id/mnu_search_main"
+            android:icon="@drawable/ic_tb_search"
+            appc:showAsAction="ifRoom"
+            />
+
+    <item
+            appc:showAsAction = "ifRoom"
+            android:icon = "@drawable/ic_tb_sort"
+            android:title = "@string/mnu_sort"
+            >
+        <menu>
+            <group
+                    android:checkableBehavior = "all"
+                    >
+                <item
+                        android:id = "@+id/mnu_sort_asc"
+                        android:title = "@string/mnu_sort_asc"
+                        appc:showAsAction = "never"
+                        />
+            </group>
+
+            <group
+
+                    android:checkableBehavior = "single"
+                    >
+                <item
+                        android:id = "@+id/mnu_sort_dist"
+                        android:title = "@string/mnu_sort_dist"
+                        appc:showAsAction = "never"
+                        />
+                <item
+                        android:id = "@+id/mnu_sort_rating"
+                        android:title = "@string/mnu_sort_rating"
+                        appc:showAsAction = "never"
+                        />
+            </group>
+        </menu>
+    </item>
+
+    <item
+            android:id = "@+id/mnu_filter"
+            android:title = "@string/mnu_filter"
+            android:icon = "@drawable/ic_tb_filter"
+            appc:showAsAction = "never"
+            />
+
+</menu>
+

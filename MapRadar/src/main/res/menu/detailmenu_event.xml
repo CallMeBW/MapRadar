@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android = "http://schemas.android.com/apk/res/android"
+      xmlns:appc = "http://schemas.android.com/apk/res-auto"
+        >
+    <item
+            android:id="@+id/mnu_favourite_event"
+            android:title="Favorisieren"
+            android:icon="@drawable/ic_favorite_outline_white"
+            appc:showAsAction="ifRoom"
+            />
+    <item
+            android:id="@+id/mnu_all_layers"
+            android:title = "Teilen"
+            android:onClick="onClickShare"
+            android:icon = "@drawable/ic_share_white"
+            appc:showAsAction = "ifRoom"
+            >
+    </item>
+</menu>

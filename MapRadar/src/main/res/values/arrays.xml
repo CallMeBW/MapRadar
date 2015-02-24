@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "radius_values">
+        <item>5 Minuten</item>
+        <item>10 Minuten</item>
+        <item>15 Minuten</item>
+        <item>30 Minuten</item>
+
+    </string-array>
+    <string-array name = "reminder_values">
+        <item>Eine Woche vorher</item>
+        <item>Zwei Tage vorher</item>
+        <item>Einen Tag vorher</item>
+        <item>Am selben Tag</item>
+        <item>Eine Stunde vorher</item>
+
+    </string-array>
+</resources>

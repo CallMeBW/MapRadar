@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android = "http://schemas.android.com/apk/res/android"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent">
+
+   <include layout="@layout/toolbar_actionbar"/>
+
+<ScrollView
+        xmlns:android = "http://schemas.android.com/apk/res/android"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:layout_alignParentBottom="true"
+        >
+    <LinearLayout
+                  android:orientation = "vertical"
+                  android:layout_width = "match_parent"
+                  android:layout_height = "wrap_content"
+                  android:measureWithLargestChild = "false">
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Kategorien"
+                android:textSize = "25sp"
+                android:textStyle = "bold"
+                android:layout_marginLeft = "15dp"
+                android:layout_marginTop = "15dp"
+                android:layout_marginRight = "15dp"
+                android:layout_marginBottom = "5dp"
+                />
+
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Wählen Sie Kategorien nach Ihren Bedürfnissen an und ab. Sie können die Kategorien auch bequem über das Menü auf der Startseite wählen."
+                android:layout_marginLeft = "15dp"
+                android:layout_marginRight = "30dp"
+                android:textSize = "13sp"
+                android:layout_marginBottom = "10dp" />
+
+        <Button
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Kategorien wählen"
+                android:onClick="chooseCats"
+                android:layout_marginLeft = "30dp"
+                android:layout_marginRight = "30dp"
+                android:layout_marginBottom = "10dp"
+         />
+        <include layout="@layout/divider"/>
+
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Radius"
+                android:textSize = "25sp"
+                android:textStyle = "bold"
+                android:layout_marginLeft = "15dp"
+                android:layout_marginTop = "15dp"
+                android:layout_marginRight = "15dp"
+                android:layout_marginBottom = "5dp" />
+
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Geben Sie an, wie viele Minuten die Ziele maximal entfernt sein sollen. Die Zeit bezieht sich immer auf die Dauer mit dem aktuell ausgewählten Transportmittel"
+                android:id = "@+id/textView6"
+                android:layout_marginLeft = "15dp"
+                android:layout_marginRight = "30dp"
+                android:textSize = "13sp"
+                android:layout_marginBottom = "10dp" />
+
+        <Spinner
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:id = "@+id/settings_radius_spinner"
+                android:layout_marginLeft = "30dp"
+                android:layout_marginRight = "30dp"
+                android:spinnerMode = "dropdown" />
+
+        <include layout="@layout/divider"/>
+
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Benachrichtigungen"
+                android:textSize = "25sp"
+                android:textStyle = "bold"
+                android:layout_marginLeft = "15dp"
+                android:layout_marginTop = "15dp"
+                android:layout_marginRight = "15dp"
+                android:layout_marginBottom = "5dp"
+                android:id = "@+id/textView9" />
+
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "MapRadar sendet Ihnen Push-Beanchrichtigungen auf alle Ihre Geräten, damit Sie niemals Veranstaltungen verpassen oder tolle Locations übersehen. "
+                android:id = "@+id/textView10"
+                android:layout_marginLeft = "15dp"
+                android:layout_marginRight = "30dp"
+                android:textSize = "13sp"
+                android:layout_marginBottom = "10dp" />
+
+        <CheckBox
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Über Locations und Events in der Nähe benachrichtigen, die meinen Interessen entsprechen"
+                android:id = "@+id/checkBox2"
+                android:layout_marginLeft = "30dp"
+                android:layout_marginRight = "30dp"
+                android:checked = "true"
+                android:layout_marginBottom = "10dp" />
+
+        <CheckBox
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "An anstehende, favorisierte Veranstaltungen erinnert werden."
+                android:id = "@+id/checkBox"
+                android:layout_marginLeft = "30dp"
+                android:layout_marginRight = "30dp"
+                android:checked = "true"
+                android:layout_marginBottom = "10dp" />
+
+        <Spinner
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:id = "@+id/settings_reminder_spinner"
+                android:layout_marginLeft = "30dp"
+                android:layout_marginRight = "30dp"
+                android:spinnerMode = "dropdown" />
+
+        <include layout="@layout/divider"/>
+
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Privatsphäre"
+                android:textSize = "25sp"
+                android:textStyle = "bold"
+                android:layout_marginLeft = "15dp"
+                android:layout_marginTop = "15dp"
+                android:layout_marginRight = "15dp"
+                android:layout_marginBottom = "5dp" />
+
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Die App orientiert sich an Ihren Favoriten und besuchten Orten, um Ihnen personenbezogene Empfehlungen zu geben."
+                android:id = "@+id/textView8"
+                android:layout_marginLeft = "15dp"
+                android:layout_marginRight = "30dp"
+                android:textSize = "13sp"
+                android:layout_marginBottom = "10dp" />
+
+        <Button
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Personenbezogene Daten löschen"
+                android:onClick="deletePrivateData"
+                android:id = "@+id/button"
+                android:layout_marginLeft = "30dp"
+                android:layout_marginRight = "30dp"
+                android:layout_marginBottom = "10dp" />
+        <include layout="@layout/divider"/>
+
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Ansicht"
+                android:textSize = "25sp"
+                android:textStyle = "bold"
+                android:layout_marginLeft = "15dp"
+                android:layout_marginTop = "15dp"
+                android:layout_marginRight = "15dp"
+                android:layout_marginBottom = "5dp"
+                 />
+
+        <TextView
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Wenn Sie es vorziehen, den kompletten Bildschirm mit ... auszufüllen, können Sie die Bar oben beim scrollen ausblenden."
+                android:layout_marginLeft = "15dp"
+                android:layout_marginRight = "30dp"
+                android:textSize = "13sp"
+                android:layout_marginBottom = "10dp" />
+
+        <CheckBox
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:text = "Actionbar automatisch ausblenden"
+                android:onClick="deletePrivateData"
+                android:layout_marginLeft = "30dp"
+                android:layout_marginRight = "30dp"
+                android:layout_marginBottom = "10dp" />
+
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>
+</LinearLayout>

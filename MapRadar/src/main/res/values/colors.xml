@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name = "bg_gray">#ffe5e5e5</color>
+
+    <color name = "theme_accent100">#ffff81ab</color>
+    <color name = "theme_accent200">#ffff4182</color>
+    <color name = "theme_accent">#fff50258</color>
+    <color name = "theme_primary700">#ff1c7bce</color>
+    <color name = "theme_primary">#ff2089e5</color>
+    <color name = "theme_primary100">#D1C4E9</color>
+
+
+    <color name = "transparent">#00000000</color>
+    <color name = "dark_gray">#ff373737</color>
+    <color name = "light_gray">#ffd4d4d4</color>
+    <color name = "transparent_gray" >#5c111111</color>
+    <color name = "rosa">#ffff0075</color>
+    <color name = "blau" >#ff3200ff</color>
+    <color name = "gelb" >#ffe8cc00</color>
+    <color name = "orange">#ffff7000</color>
+    <color name = "dblau" >#ff3400a3</color>
+    <color name = "gruen" >#ff00a22a</color>
+    <color name = "lila" >#ff7a00a1</color>
+    <color name = "rot" >#ffc7000b</color>
+    <color name = "navdrawer_icon_tint">#888</color>
+</resources>
+
+<!--<resources>-->
+    <!--<color name = "bg_gray">#ffe5e5e5</color>-->
+    <!--<color name = "accent">a#FFFFFF</color>-->
+    <!--<color name = "main">#3F51B5</color>-->
+    <!--<color name = "main_brighter">#a33f51b5</color>-->
+    <!--<color name = "transparent">#00000000</color>-->
+<!--</resources>-->

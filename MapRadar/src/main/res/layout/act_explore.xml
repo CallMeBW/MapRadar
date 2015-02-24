@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+        xmlns:android = "http://schemas.android.com/apk/res/android"
+        xmlns:tools = "http://schemas.android.com/tools"
+        android:id = "@+id/drawer_layout"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:fitsSystemWindows = "true"
+        tools:context = ".fragments.Fragmentactivity">
+    <LinearLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:orientation="vertical">
+
+        <include layout = "@layout/toolbar_actionbar" />
+        <RelativeLayout
+                android:layout_width = "fill_parent"
+                android:layout_height = "fill_parent"
+                xmlns:android = "http://schemas.android.com/apk/res/android">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_refresh_layout"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:layout_alignParentBottom = "true"
+                    android:layout_gravity = "center">
+
+
+                <ScrollView
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:id = "@+id/scrollView"
+
+                        >
+
+                    <LinearLayout
+                            android:id="@+id/frg_home_linearlay"
+                            android:animateLayoutChanges="true"
+                            android:orientation = "vertical"
+                            android:layout_width = "fill_parent"
+                            android:layout_height = "fill_parent"
+                            android:background = "#ffebebeb">
+
+
+                        <RelativeLayout
+                                android:layout_width = "fill_parent"
+                                android:layout_height = "wrap_content"
+                                android:layout_gravity = "center_horizontal|top"
+                                android:padding = "8dp"
+                                android:background = "?android:attr/selectableItemBackground"
+                                android:id = "@+id/frg_home_cur_place_container"
+                                >
+
+                            <TextView
+                                    android:layout_width = "wrap_content"
+                                    android:layout_height = "wrap_content"
+                                    android:text = "Sie befinden sich hier:"
+                                    android:id = "@+id/detail_subtitle"
+                                    android:layout_alignParentTop = "false"
+                                    android:layout_alignStart = "@+id/home_frg_location"
+                                    android:textSize = "15sp"
+                                    android:textColor = "@color/theme_primary"
+                                    android:gravity = "center_horizontal"
+                                    android:layout_alignParentRight = "true"
+                                    android:layout_alignParentEnd = "true" />
+
+                            <TextView
+                                    android:layout_width = "fill_parent"
+                                    android:layout_height = "wrap_content"
+                                    android:textAppearance = "?android:attr/textAppearanceLarge"
+                                    android:id = "@+id/home_frg_location"
+                                    android:layout_below = "@+id/detail_subtitle"
+                                    android:textColor = "@color/theme_primary"
+                                    android:text = "Standort wird ermittelt..."
+                                    android:gravity = "center_horizontal" />
+                        </RelativeLayout>
+
+                        <FrameLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                                     android:id = "@+id/map_home_container"
+                                     android:onClick = "showMap"
+                                     android:layout_width = "match_parent"
+                                     android:layout_height = "180dp"
+                                />
+
+                        <com.jpardogo.android.googleprogressbar.library.GoogleProgressBar
+                                xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/google_progress"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                app:type="folding_circles"/>
+
+                    </LinearLayout>
+
+                </ScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+    <include layout = "@layout/navdrawer" />
+</android.support.v4.widget.DrawerLayout>

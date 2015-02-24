@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android = "http://schemas.android.com/apk/res/android"
+      xmlns:appc = "http://schemas.android.com/apk/res-auto"
+        >
+    <item
+            android:id="@+id/mnu_favourite"
+            android:title="Favorisieren"
+            android:icon="@drawable/ic_favorite_outline_white"
+            appc:showAsAction="ifRoom"
+            />
+    <item
+            android:id="@+id/mnu_all_layers"
+            appc:showAsAction = "ifRoom"
+            android:icon = "@drawable/ic_layers_white"
+            android:title = "Ebene"
+            >
+        <menu>
+
+            <group
+
+                    android:checkableBehavior = "single"
+                    >
+                <item
+                        android:id = "@+id/mnu_layer_satellite"
+                        android:title = "Hybrid"
+                        appc:showAsAction = "never"
+                        />
+                <item
+                        android:id = "@+id/mnu_layer_normal"
+                        android:title = "Atlas"
+                        appc:showAsAction = "never"
+                        />
+            </group>
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+              android:orientation = "vertical"
+              android:layout_width = "match_parent"
+              android:layout_height = "wrap_content"
+              android:background = "@android:color/white">
+
+    <TextView
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:text = "Peter Silie"
+            android:id = "@+id/textView3"
+            android:textStyle = "bold"
+            android:textColor = "@android:color/black"
+            android:paddingTop = "5dp"
+            android:paddingRight = "5dp"
+            android:layout_margin = "5dp" />
+
+    <RatingBar
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/ratingBar4"
+            style = "?android:attr/ratingBarStyleSmall"
+            android:numStars = "5"
+            android:rating = "5"
+            android:layout_margin = "5dp"
+            android:layout_marginLeft = "10dp"
+            android:stepSize = "1" />
+
+    <TextView
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:text = "Ich war mit meiner Familie hier und ich muss wirklich sagen diese Location hat mich total beeindruckt. Ich würde jederzeit wieder hier her kommen. \nKann  ich nur empfehlen!!"
+            android:id = "@+id/textView4"
+            android:paddingLeft = "5dp"
+            android:paddingRight = "5dp"
+            android:paddingBottom = "5dp"
+            android:layout_margin = "5dp"
+            android:layout_marginLeft = "30dp" />
+    <include layout="@layout/divider"/>
+</LinearLayout>

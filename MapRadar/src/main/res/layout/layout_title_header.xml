@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android = "http://schemas.android.com/apk/res/android"
+        android:layout_width = "fill_parent"
+        android:layout_height = "wrap_content"
+        android:padding = "5dp"
+        >
+
+    <TextView
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/title_header_titleview"
+            android:textSize = "21sp"
+            android:layout_centerVertical = "true"
+            android:layout_alignParentLeft = "true"
+            android:layout_alignParentStart = "true"
+            android:textColor = "#ffffffff"
+            android:layout_toLeftOf = "@+id/title_header_map_button"
+            android:layout_toStartOf = "@+id/title_header_map_button"
+            android:maxLines = "2"
+            android:ellipsize = "end" />
+
+    <Button
+            style = "?android:attr/buttonStyleSmall"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:onClick="onButtonMehrPressed"
+            android:id = "@+id/title_header_more_btn"
+            android:layout_centerVertical = "true"
+            android:layout_alignParentRight = "true"
+            android:layout_alignParentEnd = "true"
+            android:text = "Alle" />
+
+    <ImageButton
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/title_header_map_button"
+            android:layout_centerVertical = "true"
+            android:src = "@drawable/ic_map_grey"
+            android:scaleType = "fitCenter"
+            android:layout_toLeftOf = "@+id/title_header_more_btn"
+            android:layout_toStartOf = "@+id/title_header_more_btn"
+            android:layout_alignBottom = "@+id/title_header_more_btn"
+            android:layout_alignTop = "@+id/title_header_more_btn" />
+
+</RelativeLayout>

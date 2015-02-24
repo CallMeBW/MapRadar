@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name = "action_bar_auto_hide_min_y">152dp</dimen>
+    <dimen name = "action_bar_auto_hide_sensivity">48dp</dimen>
+    <dimen name = "navdrawer_width">260dp</dimen>
+    <dimen name = "keyline_1">16dp</dimen>
+</resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout android:orientation="vertical"
+            xmlns:android = "http://schemas.android.com/apk/res/android"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent">
+
+        <android.support.v7.widget.Toolbar
+                xmlns:app = "http://schemas.android.com/apk/res-auto"
+                android:layout_width = "match_parent"
+                android:layout_height = "?attr/actionBarSize"
+                android:id = "@+id/category_toolbar"
+                android:background = "?attr/colorPrimary"
+                app:theme = "@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme = "@style/ThemeOverlay.AppCompat.Light"
+                />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:layout_alignParentBottom = "true"
+            android:layout_gravity = "center">
+
+        <ScrollView
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent">
+
+            <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:orientation = "vertical"
+                    android:id = "@+id/container_for_category_detail_cards"
+                    />
+
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>

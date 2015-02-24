@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android = "http://schemas.android.com/apk/res/android"
+          package = "de.ip.mapradar">
+
+    <uses-permission android:name = "com.vogella.android.locationapi.maps.permission.MAPS_RECEIVE" />
+    <uses-permission android:name = "android.permission.INTERNET" />
+    <uses-permission android:name = "android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name = "android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name = "com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name = "android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name = "android.permission.ACCESS_FINE_LOCATION" />
+
+    <permission
+            android:name = "com.example.hellomap.permission.MAPS_RECEIVE"
+            android:protectionLevel = "signature" />
+
+    <!-- The following four permissions -->
+    <uses-permission android:name = "android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+            android:name = ".main.MapApplication"
+            android:allowBackup = "true"
+            android:label = "@string/tasks_app_name"
+            android:icon = "@drawable/mapradar"
+            android:theme = "@style/MapRadarTheme">
+        <meta-data
+                android:name = "com.google.android.maps.v2.API_KEY"
+                android:value = "AIzaSyAbOjsob7891CXeI1vXNdJygrYJKLzOn1I" />
+        <meta-data
+                android:name = "com.google.android.gms.version"
+                android:value = "@integer/google_play_services_version" />
+
+        <activity
+                android:name = ".activity.SearchActivity"
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                />
+        <activity
+                android:name = ".activity.SearchActivity2"
+                android:label=""
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                />
+        <activity
+                android:name = ".activity.EventsActivity"
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                />
+        <activity
+                android:name = ".activity.ExploreActivity"
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                android:label="@string/appname"
+                >
+            <intent-filter>
+                <action android:name = "android.intent.action.VIEW" />
+                <category android:name = "android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name = "android.intent.action.MAIN" />
+                <category android:name = "android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name = "android.intent.action.ASSIST" />
+
+                <category android:name = "android.intent.category.DEFAULT">
+                </category>
+                <meta-data
+                        android:name = "com.android.systemui.action_assist_icon"
+                        android:resource = "@drawable/mapradar_gruen" />
+            </intent-filter>
+            <meta-data
+                    android:name = "com.android.systemui.action_assist_icon"
+                    android:resource = "@drawable/mapradar_gruen" />
+        </activity>
+        <activity
+                android:name = ".activity.FavouritesActivity"
+                >
+        </activity>
+        <activity
+                android:name = ".activity.CategoryActivity"
+                android:parentActivityName = ".activity.ExploreActivity"
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                android:label = "@string/settings" />
+        <activity
+                android:name = ".activity.DetailBusinessActivity"
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                />
+        <activity
+                android:name = ".activity.DetailEventActivity"
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                />
+        <activity
+                android:name = ".activity.AboutActivity"
+                android:parentActivityName = ".activity.ExploreActivity"
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                />
+        <activity
+                android:name = ".activity.TutorialActivity"
+                android:parentActivityName = ".activity.ExploreActivity"
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                android:screenOrientation = "portrait"
+                />
+        <activity
+                android:name = ".activity.SettingsActivity"
+                android:parentActivityName = ".activity.ExploreActivity"
+                android:configChanges = "keyboardHidden|orientation|screenSize"
+                />
+
+        <provider
+                android:authorities="mapradar.RecentSuggestionsProvider"
+                android:name=".provider.RecentSuggestionsProvider"
+                >
+        </provider>
+
+    </application>
+
+
+</manifest>

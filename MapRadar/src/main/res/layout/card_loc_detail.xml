@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:card_view = "http://schemas.android.com/apk/res-auto"
+        xmlns:android = "http://schemas.android.com/apk/res/android"
+        android:layout_width = "match_parent"
+        android:layout_height = "150dp"
+        card_view:cardCornerRadius = "4dp"
+        android:layout_marginRight = "10dp"
+        android:layout_marginLeft= "10dp"
+        android:layout_marginBottom="5dp"
+        >
+
+    <LinearLayout
+            android:gravity = "center"
+            android:orientation = "horizontal"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:layout_gravity = "center_horizontal"
+            >
+
+        <FrameLayout
+                android:layout_width = "0dp"
+                android:layout_weight = "0.5"
+                android:layout_height = "150dp"
+                android:layout_margin = "1dp">
+
+            <ImageView
+                    android:id = "@+id/card_location_detail_title_img"
+                    android:src = "@drawable/ic_no_photo_grey"
+                    android:scaleType = "centerCrop"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "150dp"
+                    android:layout_gravity = "center"
+                     />
+
+            <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:text = "5 min"
+                    android:layout_gravity = "right|bottom"
+                    android:background = "@drawable/circular_rectangle_shape"
+                    android:layout_margin = "15dp"
+                    android:textColor = "@android:color/white"
+                    android:padding = "8dp"
+                    android:textSize = "15sp"
+                    android:id = "@+id/card_location_detail_minutes" />
+        </FrameLayout>
+
+        <LinearLayout
+                android:layout_width = "0dp"
+                android:layout_height = "match_parent"
+                android:layout_gravity = "center_horizontal"
+                android:padding = "5dp"
+                android:orientation = "vertical"
+                android:layout_marginTop = "5dp"
+                android:layout_weight = "0.5"
+                android:background = "?android:attr/selectableItemBackground"
+                android:visibility = "visible">
+
+            <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:id = "@+id/card_location_detail_title"
+                    android:textSize = "17sp"
+                    android:visibility = "visible"
+                    android:layout_marginTop = "5dp"
+                    android:maxLines = "2" />
+
+            <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:id = "@+id/card_loc_detail_category"
+                    android:textSize = "15sp"
+                    android:textColor = "@color/dark_gray"
+                    android:visibility = "visible"
+                    android:layout_marginTop = "5dp"
+                    android:maxLines = "1" />
+
+            <RatingBar
+                    android:id = "@+id/card_loc_detail_ratingbar"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    style = "?android:attr/ratingBarStyleSmall"
+                    android:numStars = "5"
+                    android:visibility = "visible"
+                    android:layout_marginTop = "5dp" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

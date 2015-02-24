@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$USER_HOME$/Desktop/MaterialDesignLibrary-master" />
+    <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://P:/Android SDK/extras/android/support/v7/appcompat" />
+  </component>
+  <component name="IdProvider" IDEtalkID="7C019A76966E1BCADFB3D07F9DC9F0B3" />
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop" />
+    <option name="OPTION_SCOPE" value="protected" />
+    <option name="OPTION_HIERARCHY" value="true" />
+    <option name="OPTION_NAVIGATOR" value="true" />
+    <option name="OPTION_INDEX" value="true" />
+    <option name="OPTION_SEPARATE_INDEX" value="true" />
+    <option name="OPTION_DOCUMENT_TAG_USE" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_VERSION" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="true" />
+    <option name="OPTION_DEPRECATED_LIST" value="true" />
+    <option name="OTHER_OPTIONS" />
+    <option name="HEAP_SIZE" />
+    <option name="LOCALE" />
+    <option name="OPEN_IN_BROWSER" value="true" />
+    <option name="OPTION_INCLUDE_LIBS" value="false" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$USER_HOME$/Desktop/android-common-master/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$USER_HOME$/Desktop/android-common-master/ads/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/all/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/app/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/billing/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/core/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/db/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/fragments/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/http/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/keyboards/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/lists/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/menus/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/networks/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/other/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/preferences/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/samples-test/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/samples/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/security/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/sherlock/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/tasks/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/views/pom.xml" />
+        <option value="$USER_HOME$/Desktop/android-common-master/wizard/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+</project>
