@@ -56,6 +56,7 @@ public class YelpAPI {
     }
 
     public String searchByBusinessId(String businessID) {
+
         businessID = businessID
                 .replaceAll("ö", "oe");
         OAuthRequest request = createOAuthRequest(BUSINESS_PATH + "/" + businessID);
@@ -69,8 +70,7 @@ public class YelpAPI {
      * @return <tt>OAuthRequest</tt>
      */
     private OAuthRequest createOAuthRequest(String path) {
-        OAuthRequest request = new OAuthRequest(Verb.GET, "http://" + "api.yelp.com" + path);
-        return request;
+        return new OAuthRequest(Verb.GET, "http://" + "api.yelp.com" + path);
     }
 
     private String param(final String key, final String value) {
