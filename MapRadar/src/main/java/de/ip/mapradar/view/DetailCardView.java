@@ -30,7 +30,7 @@ public class DetailCardView extends FrameLayout {
         this.title = (TextView) v.findViewById(R.id.card_location_detail_title);
         this.subtitle = (TextView) v.findViewById(R.id.card_loc_detail_category);
         ratingBar = (RatingBar) v.findViewById(R.id.card_loc_detail_ratingbar);
-        minuteTV = (TextView) v.findViewById(R.id.card_location_detail_minutes);
+        minuteTV = (TextView) v.findViewById(R.id.card_location_detail_meters);
         this.title.setText(model.name);
         this.subtitle.setText(model.subCategory);
         this.ratingBar.setNumStars(5);

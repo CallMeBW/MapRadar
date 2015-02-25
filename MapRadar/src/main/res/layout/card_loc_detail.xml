@@ -36,14 +36,14 @@
             <TextView
                     android:layout_width = "wrap_content"
                     android:layout_height = "wrap_content"
-                    android:text = "5 min"
                     android:layout_gravity = "right|bottom"
                     android:background = "@drawable/circular_rectangle_shape"
+                    android:elevation="1dp"
                     android:layout_margin = "15dp"
                     android:textColor = "@android:color/white"
                     android:padding = "8dp"
                     android:textSize = "15sp"
-                    android:id = "@+id/card_location_detail_minutes" />
+                    android:id = "@+id/card_location_detail_meters" />
         </FrameLayout>
 
         <LinearLayout

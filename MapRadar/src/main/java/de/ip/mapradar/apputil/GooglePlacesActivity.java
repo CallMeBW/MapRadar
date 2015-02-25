@@ -49,7 +49,7 @@ public class GooglePlacesActivity extends BaseActivity implements FavsAdapter.On
                 FavsAdapter ca = new FavsAdapter(new ArrayList<Business>(Arrays.asList(businesses)),GooglePlacesActivity.this);
                 recList.setAdapter(ca);
             }
-        }.run(false);
+        }.run(true);
         enableActionBarAutoHide(recList);
     }
 

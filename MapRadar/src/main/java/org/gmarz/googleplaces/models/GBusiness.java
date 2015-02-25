@@ -20,6 +20,10 @@ public class GBusiness extends Business {
             } else {
                 address = jsonPlace.getString("formatted_address");
             }
+            JSONArray types = jsonPlace.getJSONArray("types");
+            if(types != null && types.length() > 0){
+                category = (String) types.get(0);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
