@@ -21,6 +21,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />
+        <TextView
+                android:id="@+id/textview_no_favs"
+                android:text="@string/no_favs"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_marginLeft="@dimen/keyline_1"
+                android:layout_marginTop="@dimen/keyline_1"
+                />
 
     </LinearLayout>
     <include layout="@layout/navdrawer" />

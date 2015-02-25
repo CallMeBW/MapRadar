@@ -36,9 +36,13 @@ public class FavouritesActivity extends BaseActivity implements FavsAdapter.OnIt
         } catch (Exception e) {
             e.printStackTrace();
         }
-        FavsAdapter ca = new FavsAdapter(favourites,this);
-        recList.setAdapter(ca);
-        enableActionBarAutoHide(recList);
+        if(!favourites.isEmpty()){
+            FavsAdapter ca = new FavsAdapter(favourites,this);
+            recList.setAdapter(ca);
+        }
+        recList.setVisibility(favourites.isEmpty() ? View.GONE : View.VISIBLE);
+        findViewById(R.id.textview_no_favs).setVisibility(favourites.isEmpty() ? View.VISIBLE : View.GONE);
+
     }
 
     @Override

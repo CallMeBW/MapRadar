@@ -50,4 +50,5 @@
     <string name = "appname">MapRadar</string>
     <string name = "search_label">Suche</string>
     <string name = "search_hint">Suchen</string>
+    <string name = "no_favs">Keine Favoriten vorhanden. Sie können Favoriten hinzufügen, indem Sie auf das Herz-Symbol einer Location klicken.</string>
 </resources>

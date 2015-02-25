@@ -36,6 +36,7 @@ public class GooglePlacesActivity extends BaseActivity implements FavsAdapter.On
         recList.setHasFixedSize(true);
         GridLayoutManager llm = new GridLayoutManager(this,getResources().getInteger(R.integer.favs_grid_col_count),GridLayoutManager.VERTICAL,false);
         recList.setLayoutManager(llm);
+        recList.setItemViewCacheSize(20);
 
         new AndroidUtil.VoidAsyncTask(){
 

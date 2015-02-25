@@ -37,7 +37,7 @@ public class FavsAdapter extends RecyclerView.Adapter<FavsAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder vh, int i) {
         Business model = data.get(i);
         vh.vTitle.setText(model.name);
-        vh.vCategory.setText(model.subCategory);
+        vh.vCategory.setText(model.category);
         vh.vRatingBar.setNumStars(5);
         int random = new Random().nextInt(10);
         vh.vMeters.setText(random + " min");

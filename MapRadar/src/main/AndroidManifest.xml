@@ -80,7 +80,6 @@
                 android:label = "@string/settings" />
         <activity
                 android:name = ".apputil.GooglePlacesActivity"
-                android:configChanges = "keyboardHidden|orientation|screenSize"
                 />
         <activity
                 android:name = ".activity.DetailBusinessActivity"

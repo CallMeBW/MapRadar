@@ -1,11 +1,11 @@
 package org.gmarz.googleplaces.models;
 import android.location.Location;
+import android.util.Log;
 import de.ip.mapradar.model.Business;
 import org.json.*;
 
 public class GBusiness extends Business {
     private PlaceDetails mDetails;
-
 
     public GBusiness(JSONObject jsonPlace) {
         try {
@@ -14,18 +14,21 @@ public class GBusiness extends Business {
             imageURL = jsonPlace.getString("icon");
             LATITUDE = jsonPlace.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
             LONGITUDE = jsonPlace.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
-            RATING = jsonPlace.getDouble("rating");
+            if (jsonPlace.has("rating")) {
+                RATING = (double) jsonPlace.get("rating");
+            }
             if (jsonPlace.has("vicinity")) {
                 address = jsonPlace.getString("vicinity");
             } else {
                 address = jsonPlace.getString("formatted_address");
             }
             JSONArray types = jsonPlace.getJSONArray("types");
-            if(types != null && types.length() > 0){
+            if (types != null && types.length() > 0) {
                 category = (String) types.get(0);
             }
+            Log.d("CATEGORYNULL", category);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e("GBUSINESS", "JSONException", e);
         }
     }
 
