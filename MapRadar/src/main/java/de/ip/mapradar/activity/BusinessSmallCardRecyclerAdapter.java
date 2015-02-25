@@ -1,18 +1,15 @@
 package de.ip.mapradar.activity;
 import android.graphics.*;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import de.ip.mapradar.R;
-import de.ip.mapradar.main.MapApplication;
 import de.ip.mapradar.model.Business;
-import org.gmarz.googleplaces.models.GBusiness;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.List;
 
 /**
  * <code>
@@ -38,14 +35,7 @@ public class BusinessSmallCardRecyclerAdapter extends RecyclerView.Adapter<Busin
     public void onBindViewHolder(final ViewHolder vh, int i) {
         Business model = data.get(i);
         vh.vTitle.setText(model.name);
-        vh.vCategory.setText(model.category);
         vh.vRatingBar.setNumStars(5);
-        int random = new Random().nextInt(10);
-        vh.vMeters.setText(random + " min");
-        Location lastloc = MapApplication.getInstance().getLastKnownLocation();
-        if(model instanceof GBusiness && lastloc != null){
-            vh.vMeters.setText((int)((GBusiness) model).getDistanceTo(lastloc)+"m");
-        }
         vh.vRatingBar.setRating((float) model.RATING);
         if (vh.vRatingBar.getRating() == 0.0f) {
             vh.vRatingBar.setVisibility(View.INVISIBLE);
@@ -91,14 +81,13 @@ public class BusinessSmallCardRecyclerAdapter extends RecyclerView.Adapter<Busin
     public static class ViewHolder extends RecyclerView.ViewHolder {
         protected RatingBar vRatingBar;
         protected ImageView vImg;
-        protected TextView vMeters, vCategory, vTitle;
+        protected TextView  vTitle;
 
         public ViewHolder(View v) {
             super(v);
             vRatingBar = (RatingBar) v.findViewById(R.id.card_ratingbar);
             vImg = (ImageView) v.findViewById(R.id.card_img);
             vTitle = (TextView) v.findViewById(R.id.card_title);
-            vCategory = (TextView) v.findViewById(R.id.card_loc_detail_category);
         }
     }
 
