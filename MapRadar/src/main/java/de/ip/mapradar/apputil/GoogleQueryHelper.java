@@ -23,7 +23,7 @@ public class GoogleQueryHelper {
         PlacesResult result = null;
         try {
             GooglePlaces googlePlaces = new GooglePlaces(API_KEY);
-            result = googlePlaces.getPlaces("food", 5000, 49.199931, 9.502949);
+            result = googlePlaces.getPlaces("food|restaurant|cafe|meal_delivery|meal_takeaway", 5000, 49.199931, 9.502949);
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Date: 07.12.2014            <br></code>
  * Description:                    <br>
  */
-public class FavouritesActivity extends BaseActivity implements FavsAdapter.OnItemClickListener {
+public class FavouritesActivity extends BaseActivity implements BusinessDetailCardRecyclerAdapter.OnItemClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class FavouritesActivity extends BaseActivity implements FavsAdapter.OnIt
             e.printStackTrace();
         }
         if(!favourites.isEmpty()){
-            FavsAdapter ca = new FavsAdapter(favourites,this);
+            BusinessDetailCardRecyclerAdapter ca = new BusinessDetailCardRecyclerAdapter(favourites,this);
             recList.setAdapter(ca);
         }
         recList.setVisibility(favourites.isEmpty() ? View.GONE : View.VISIBLE);

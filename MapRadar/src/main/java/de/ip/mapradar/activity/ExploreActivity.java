@@ -294,18 +294,6 @@ public class ExploreActivity extends BaseActivity {
                             ) {
                         return;
                     }
-                    CardView[] cards = new CardView[businessesFound.length];
-                    for (int i = 0; i < businessesFound.length; i++) {
-                        cards[i] = new CardView(thisActivity, businessesFound[i]);
-                        final int finalI = i;
-                        cards[i].setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                onCardClick(businessesFound[finalI]);
-                            }
-                        });
-                        businesses.add(businessesFound[i]);
-                    }
                     TitleView header = new TitleView(thisActivity, title, MapApplication.getInstance().getCategoryColor(id));
                     header.getMoreButton().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -331,9 +319,8 @@ public class ExploreActivity extends BaseActivity {
                             startActivity(showMap);
                         }
                     });
-//                    header.getMoreButton().setBackgroundColor(MapApplication.getInstance().getCategoryColor(id));
                     container.addView(header, container.getChildCount() - 1);
-                    container.addView(new MultipleCardView(thisActivity, cards), container.getChildCount() - 1);
+                    container.addView(new MultipleCardView(thisActivity, businessesFound), container.getChildCount() - 1);
                 }
             }.execute(catTitle, catID);
         }

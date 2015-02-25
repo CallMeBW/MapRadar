@@ -19,11 +19,11 @@ import java.util.*;
  * Date: 23.02.2015            <br></code>
  * Description:                    <br>
  */
-public class FavsAdapter extends RecyclerView.Adapter<FavsAdapter.ViewHolder> {
+public class BusinessDetailCardRecyclerAdapter extends RecyclerView.Adapter<BusinessDetailCardRecyclerAdapter.ViewHolder> {
     private List<Business> data;
     private final OnItemClickListener onItemClickListener;
 
-    public FavsAdapter(List<Business> contactList, OnItemClickListener onItemClickListener) {
+    public BusinessDetailCardRecyclerAdapter(List<Business> contactList, OnItemClickListener onItemClickListener) {
         this.data = contactList;
         this.onItemClickListener = onItemClickListener;
     }

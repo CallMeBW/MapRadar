@@ -7,6 +7,7 @@ import de.ip.mapradar.activity.*;
 import de.ip.mapradar.androidutil.AndroidUtil;
 import de.ip.mapradar.model.Business;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -15,8 +16,9 @@ import java.util.*;
  * Date: 24.02.2015            <br></code>
  * Description:                    <br>
  */
-public class GooglePlacesActivity extends BaseActivity implements FavsAdapter.OnItemClickListener {
+public class GooglePlacesActivity extends BaseActivity implements BusinessDetailCardRecyclerAdapter.OnItemClickListener {
     private Business[] businesses;
+    private final String EXTRA_BUSINESSES = "EXTRA_BUSI";
 
     @Override
     protected int getSelfNavDrawerItem() {
@@ -31,27 +33,56 @@ public class GooglePlacesActivity extends BaseActivity implements FavsAdapter.On
 
         toolbar.setTitle("Google Places API");
 
-
         final RecyclerView recList = (RecyclerView) findViewById(R.id.favslist_recyclerview);
         recList.setHasFixedSize(true);
-        GridLayoutManager llm = new GridLayoutManager(this,getResources().getInteger(R.integer.favs_grid_col_count),GridLayoutManager.VERTICAL,false);
+        GridLayoutManager llm = new GridLayoutManager(this, getResources().getInteger(R.integer.favs_grid_col_count), GridLayoutManager.VERTICAL,
+                false);
         recList.setLayoutManager(llm);
         recList.setItemViewCacheSize(20);
+        restoreInstance(savedInstanceState, recList);
+        enableActionBarAutoHide(recList);
+    }
 
-        new AndroidUtil.VoidAsyncTask(){
-
+    private void fetchPlaces(final RecyclerView recList) {
+        new AndroidUtil.VoidAsyncTask() {
             @Override
             protected void doInBackground() {
-                businesses = GoogleQueryHelper.searchBusiness(null,null);
+                businesses = GoogleQueryHelper.searchBusiness(null, null);
             }
 
             @Override
             protected void onPostExecute() {
-                FavsAdapter ca = new FavsAdapter(new ArrayList<Business>(Arrays.asList(businesses)),GooglePlacesActivity.this);
+                BusinessDetailCardRecyclerAdapter ca = new BusinessDetailCardRecyclerAdapter(new ArrayList<>(Arrays.asList(businesses)), GooglePlacesActivity.this);
                 recList.setAdapter(ca);
             }
         }.run(true);
-        enableActionBarAutoHide(recList);
+    }
+
+    private void restoreInstance(Bundle savedInstanceState, RecyclerView recyclerView) {
+        if (savedInstanceState == null) {
+            fetchPlaces(recyclerView);
+            return;
+        }
+        Serializable busiSer = savedInstanceState.getSerializable(EXTRA_BUSINESSES);
+        if (busiSer == null) {
+            fetchPlaces(recyclerView);
+            return;
+        }
+        Object[] objs = (Object[]) busiSer;
+        businesses = new Business[objs.length];
+        for (int i = 0; i < objs.length; i++) {
+            businesses[i] = (Business) objs[i];
+        }
+        BusinessDetailCardRecyclerAdapter ca = new BusinessDetailCardRecyclerAdapter(new ArrayList<>(Arrays.asList(businesses)), GooglePlacesActivity.this);
+        recyclerView.setAdapter(ca);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (businesses != null) {
+            outState.putSerializable(EXTRA_BUSINESSES, businesses);
+        }
     }
 
     @Override
