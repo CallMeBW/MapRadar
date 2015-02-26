@@ -16,7 +16,7 @@ public class Business implements Serializable {
     private static final long serialVersionUID = 7526472295622776148L;
     public String
             id, address, name, imageURL, yelpURL, displayPhone, phone, city, stateCode,
-            postalCode, countryCode, subCategory, subCategoryID, category, categoryID;
+            postalCode, countryCode, subCategory, subCategoryID, category, categoryID,photoRef;
     public double
             LONGITUDE, LATITUDE, RATING;
     public long reviewCount;

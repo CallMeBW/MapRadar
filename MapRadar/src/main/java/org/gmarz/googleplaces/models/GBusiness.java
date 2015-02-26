@@ -12,6 +12,7 @@ public class GBusiness extends Business {
             name = jsonPlace.getString("name");
             id = jsonPlace.getString("id");
             imageURL = jsonPlace.getString("icon");
+            photoRef = ((JSONObject)((JSONArray)jsonPlace.get("photos")).get(0)).getString("photo_reference");
             LATITUDE = jsonPlace.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
             LONGITUDE = jsonPlace.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
             if (jsonPlace.has("rating")) {
@@ -29,6 +30,7 @@ public class GBusiness extends Business {
             Log.d("CATEGORYNULL", category);
         } catch (JSONException e) {
             Log.e("GBUSINESS", "JSONException", e);
+            Log.d("JSONEXCEPTION",jsonPlace.toString());
         }
     }
 

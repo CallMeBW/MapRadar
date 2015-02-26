@@ -47,7 +47,7 @@ public class GooglePlacesActivity extends BaseActivity implements BusinessDetail
         new AndroidUtil.VoidAsyncTask() {
             @Override
             protected void doInBackground() {
-                businesses = GoogleQueryHelper.searchBusiness(null, null);
+                businesses = GoogleQueryHelper.searchBusiness();
             }
 
             @Override

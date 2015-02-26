@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.*;
 import android.widget.*;
 import de.ip.mapradar.R;
+import de.ip.mapradar.apputil.GoogleQueryHelper;
 import de.ip.mapradar.main.MapApplication;
 import de.ip.mapradar.model.Business;
 import org.gmarz.googleplaces.models.GBusiness;
@@ -42,20 +43,26 @@ public class BusinessDetailCardRecyclerAdapter extends RecyclerView.Adapter<Busi
         int random = new Random().nextInt(10);
         vh.vMeters.setText(random + " min");
         Location lastloc = MapApplication.getInstance().getLastKnownLocation();
-        if(model instanceof GBusiness && lastloc != null){
-            vh.vMeters.setText((int)((GBusiness) model).getDistanceTo(lastloc)+"m");
+        if (model instanceof GBusiness && lastloc != null) {
+            vh.vMeters.setText((int) ((GBusiness) model).getDistanceTo(lastloc) + "m");
         }
         vh.vRatingBar.setRating((float) model.RATING);
         if (vh.vRatingBar.getRating() == 0.0f) {
             vh.vRatingBar.setVisibility(View.INVISIBLE);
         }
-        final String imgUrl = String.valueOf(model.imageURL);
+        final String imgUrl = model.imageURL;
+        final String photoRef = model.photoRef;
         new AsyncTask<Void, Void, Void>() {
             private Bitmap bitMapImg;
 
             protected Void doInBackground(Void... o) {
                 try {
-                    InputStream in = new java.net.URL(imgUrl).openStream();
+                    InputStream in;
+                    if (photoRef == null) {
+                        in = new java.net.URL(imgUrl).openStream();
+                    } else {
+                        in = GoogleQueryHelper.getImgStream(photoRef);
+                    }
                     bitMapImg = BitmapFactory.decodeStream(in);
                 } catch (Exception e) {
                 }
@@ -71,15 +78,15 @@ public class BusinessDetailCardRecyclerAdapter extends RecyclerView.Adapter<Busi
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(final ViewGroup viewGroup,final int i) {
+    public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, final int i) {
         final View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.card_loc_detail, viewGroup, false);
-        if(onItemClickListener != null){
+        if (onItemClickListener != null) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onItemClicked(data.get(i),itemView,i);
+                    onItemClickListener.onItemClicked(data.get(i), itemView, i);
                 }
             });
         }
