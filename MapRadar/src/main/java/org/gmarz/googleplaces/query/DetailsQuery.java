@@ -1,19 +1,15 @@
 package org.gmarz.googleplaces.query;
-
-
 public class DetailsQuery extends Query {
+    public DetailsQuery(String placeID) {
+        setPlaceID(placeID);
+    }
 
-	public DetailsQuery(String reference) {
-		setReference(reference);
-	}
-	
-	public void setReference(String reference) {
-		mQueryBuilder.addParameter("reference", reference);
-	}
-	
-	@Override
-	public String getUrl() {
-		return "https://maps.googleapis.com/maps/api/place/details/json";
-	}
+    public void setPlaceID(String placeID) {
+        mQueryBuilder.addParameter("placeid ", placeID);
+    }
 
+    @Override
+    public String getUrl() {
+        return "https://maps.googleapis.com/maps/api/place/details/json";
+    }
 }

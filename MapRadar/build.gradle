@@ -20,7 +20,7 @@ android {
     buildToolsVersion '20.0.0'
 
     defaultConfig {
-        applicationId "de.ip.mapradar"
+        applicationId "de.bwirth.mapradar"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1

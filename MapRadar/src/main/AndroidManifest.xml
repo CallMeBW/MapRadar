@@ -18,7 +18,7 @@
     <uses-permission android:name = "android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-            android:name = "de.ip.mapradar.main.MapApplication"
+            android:name = "de.bwirth.mapradar.main.MapApplication"
             android:allowBackup = "true"
             android:label = "@string/tasks_app_name"
             android:icon = "@drawable/mapradar"
@@ -31,20 +31,20 @@
                 android:value = "@integer/google_play_services_version" />
 
         <activity
-                android:name = "de.ip.mapradar.activity.SearchActivity"
+                android:name = "de.bwirth.mapradar.activity.SearchActivity"
                 android:configChanges = "keyboardHidden|orientation|screenSize"
                 />
         <activity
-                android:name = "de.ip.mapradar.activity.SearchActivity2"
+                android:name = "de.bwirth.mapradar.activity.SearchActivity2"
                 android:label=""
                 android:configChanges = "keyboardHidden|orientation|screenSize"
                 />
         <activity
-                android:name = "de.ip.mapradar.activity.EventsActivity"
+                android:name = "de.bwirth.mapradar.activity.EventsActivity"
                 android:configChanges = "keyboardHidden|orientation|screenSize"
                 />
         <activity
-                android:name = "de.ip.mapradar.activity.ExploreActivity"
+                android:name = "de.bwirth.mapradar.activity.ExploreActivity"
                 android:configChanges = "keyboardHidden|orientation|screenSize"
                 android:label="@string/appname"
                 >
@@ -70,44 +70,44 @@
                     android:resource = "@drawable/mapradar_gruen" />
         </activity>
         <activity
-                android:name = "de.ip.mapradar.activity.FavouritesActivity"
+                android:name = "de.bwirth.mapradar.activity.FavouritesActivity"
                 >
         </activity>
         <activity
-                android:name = "de.ip.mapradar.activity.CategoryActivity"
-                android:parentActivityName = "de.ip.mapradar.activity.ExploreActivity"
+                android:name = "de.bwirth.mapradar.activity.CategoryActivity"
+                android:parentActivityName = "de.bwirth.mapradar.activity.ExploreActivity"
                 android:label = "@string/settings" />
         <activity
-                android:name = "de.ip.mapradar.apputil.GooglePlacesActivity"
+                android:name = "de.bwirth.mapradar.apputil.GooglePlacesActivity"
                 />
         <activity
-                android:name = "de.ip.mapradar.activity.DetailBusinessActivity"
+                android:name = "de.bwirth.mapradar.activity.DetailBusinessActivity"
                 android:configChanges = "keyboardHidden|orientation|screenSize"
                 />
         <activity
-                android:name = "de.ip.mapradar.activity.DetailEventActivity"
+                android:name = "de.bwirth.mapradar.activity.DetailEventActivity"
                 android:configChanges = "keyboardHidden|orientation|screenSize"
                 />
         <activity
-                android:name = "de.ip.mapradar.activity.AboutActivity"
-                android:parentActivityName = "de.ip.mapradar.activity.ExploreActivity"
+                android:name = "de.bwirth.mapradar.activity.AboutActivity"
+                android:parentActivityName = "de.bwirth.mapradar.activity.ExploreActivity"
                 android:configChanges = "keyboardHidden|orientation|screenSize"
                 />
         <activity
-                android:name = "de.ip.mapradar.activity.TutorialActivity"
-                android:parentActivityName = "de.ip.mapradar.activity.ExploreActivity"
+                android:name = "de.bwirth.mapradar.activity.TutorialActivity"
+                android:parentActivityName = "de.bwirth.mapradar.activity.ExploreActivity"
                 android:configChanges = "keyboardHidden|orientation|screenSize"
                 android:screenOrientation = "portrait"
                 />
         <activity
-                android:name = "de.ip.mapradar.activity.SettingsActivity"
-                android:parentActivityName = "de.ip.mapradar.activity.ExploreActivity"
+                android:name = "de.bwirth.mapradar.activity.SettingsActivity"
+                android:parentActivityName = "de.bwirth.mapradar.activity.ExploreActivity"
                 android:configChanges = "keyboardHidden|orientation|screenSize"
                 />
 
         <provider
-                android:authorities="mapradar.RecentSuggestionsProvider"
-                android:name="de.ip.mapradar.provider.RecentSuggestionsProvider"
+                android:authorities="bwirth.mapradar.RecentSuggestionsProvider"
+                android:name="de.bwirth.mapradar.provider.RecentSuggestionsProvider"
                 >
         </provider>
 

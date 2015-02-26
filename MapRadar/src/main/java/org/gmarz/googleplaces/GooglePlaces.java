@@ -76,6 +76,11 @@ public class GooglePlaces {
 
         return result;
     }
+    public AutoCompleteResult getAutocompletePredictions(AutocompleteQuery query)
+            throws JSONException, ClientProtocolException, IOException {
+        JSONObject response = executeRequest(query.toString());
+        return new AutoCompleteResult(response);
+    }
 
     public DetailsResult getPlaceDetails(String reference)
             throws JSONException, ClientProtocolException, IOException {

@@ -1,7 +1,7 @@
 package org.gmarz.googleplaces.models;
 import android.location.Location;
 import android.util.Log;
-import de.ip.mapradar.model.Business;
+import de.bwirth.mapradar.model.Business;
 import org.json.*;
 
 public class GBusiness extends Business {
@@ -12,7 +12,11 @@ public class GBusiness extends Business {
             name = jsonPlace.getString("name");
             id = jsonPlace.getString("id");
             imageURL = jsonPlace.getString("icon");
-            photoRef = ((JSONObject)((JSONArray)jsonPlace.get("photos")).get(0)).getString("photo_reference");
+            try {
+                photoRef = ((JSONObject) ((JSONArray) jsonPlace.get("photos")).get(0)).getString("photo_reference");
+            } catch (JSONException e) {
+                Log.w("retrieving photo", "no photo found for " + name);
+            }
             LATITUDE = jsonPlace.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
             LONGITUDE = jsonPlace.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
             if (jsonPlace.has("rating")) {
@@ -30,7 +34,7 @@ public class GBusiness extends Business {
             Log.d("CATEGORYNULL", category);
         } catch (JSONException e) {
             Log.e("GBUSINESS", "JSONException", e);
-            Log.d("JSONEXCEPTION",jsonPlace.toString());
+            Log.d("JSONEXCEPTION", jsonPlace.toString());
         }
     }
 
