@@ -45,7 +45,7 @@ public class SuggestionsDatabase {
             return;
         }
         // TODO delete alll rows that exceed the max row count
-//        db.delete(TABLE_SUGGESTION, FIELD_ID + "=?", new String[] { "" });
+//        db.delete(TABLE_NAME, FIELD_ID + "=?", new String[] { "" });
 
     }
 

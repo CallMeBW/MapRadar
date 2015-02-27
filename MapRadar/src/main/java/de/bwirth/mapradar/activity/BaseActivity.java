@@ -22,7 +22,6 @@ import java.util.*;
  * A base activity that handles common functionality in the app. This includes the
  * navigation drawer, login and authentication, Action Bar tweaks, amongst others.
  */
-
 public abstract class BaseActivity extends ActionBarActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     // Navigation drawer:
     private DrawerLayout mDrawerLayout;
@@ -312,7 +311,6 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         setupNavDrawer();
-
         trySetupSwipeRefresh();
         View mainContent = findViewById(R.id.main_content);
         if (mainContent != null) {
@@ -336,25 +334,20 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
     }
 
     protected MaterialDialog createCategoryChooserDialog() {
-        Iterator it = MapApplication.getInstance().getYelpCategories().entrySet().iterator();
-        ArrayList<String> cats = new ArrayList<>();
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry) it.next();
-            final String title = (String) pairs.getKey();
-            cats.add(title);
-        }
-        final Integer[] selectedIndizes = MapApplication.getInstance().prefs.getSelectedIndizes();
+        String[] caz = MapApplication.getInstance().getGoogleCategories();
+        final Integer[] selectedIndizes = MapApplication.getInstance().getSelectedCategoryIndices();
         return new MaterialDialog.Builder(this)
-                .items(cats.toArray(new String[cats.size()]))
+                .items(caz)
                 .positiveText(R.string.done)
                 .negativeText(R.string.cancel)
                 .title(R.string.choose_categories)
                 .itemsCallbackMultiChoice(selectedIndizes, new MaterialDialog.ListCallbackMulti() {
                     @Override
                     public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
-                        MapApplication.getInstance().prefs.setSelectedIndizes(integers);
+                        MapApplication.getInstance().setSelectedCategoryIndices(Arrays.asList(integers));
                     }
                 })
+
                 .build();
     }
 
@@ -482,14 +475,13 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
     protected void enableActionBarAutoHide(final RecyclerView listView) {
         initActionBarAutoHide();
         listView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-
             @Override
             public void onScrollStateChanged(RecyclerView view, int scrollState) {
             }
 
             @Override
             public void onScrolled(RecyclerView view, int dx, int dy) {
-                onMainContentScrolled(Integer.MAX_VALUE,Integer.MAX_VALUE
+                onMainContentScrolled(Integer.MAX_VALUE, Integer.MAX_VALUE
                 );
                 onActionBarAutoShowOrHide(false);
             }

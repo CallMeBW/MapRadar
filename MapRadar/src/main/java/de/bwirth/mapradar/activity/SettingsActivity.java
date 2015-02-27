@@ -2,12 +2,8 @@ package de.bwirth.mapradar.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
-import com.afollestad.materialdialogs.MaterialDialog;
-import de.ip.mapradar.R;
 import de.bwirth.mapradar.androidutil.AndroidUtil;
-import de.bwirth.mapradar.main.MapApplication;
-
-import java.util.*;
+import de.ip.mapradar.R;
 
 /**
  * <code>
@@ -55,31 +51,7 @@ public class SettingsActivity extends BaseActivity {
         }.run(true);
     }
 
-    private MaterialDialog createCategoryDialog() {
-        final MapApplication application = MapApplication.getInstance();
-        Iterator it = MapApplication.getInstance().getYelpCategories().entrySet().iterator();
-        ArrayList<String> cats = new ArrayList<>();
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry) it.next();
-            final String title = (String) pairs.getKey();
-            cats.add(title);
-        }
-        final Integer[] selectedIndizes = application.prefs.getSelectedIndizes();
-        return new MaterialDialog.Builder(this)
-                .items(cats.toArray(new String[cats.size()]))
-                .positiveText(R.string.done)
-                .negativeText(R.string.cancel)
-                .title(R.string.choose_categories)
-                .itemsCallbackMultiChoice(selectedIndizes, new MaterialDialog.ListCallbackMulti() {
-                    @Override
-                    public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
-                        application.prefs.setSelectedIndizes(integers);
-                    }
-                })
-                .build();
-    }
-
     public void chooseCats(View view) {
-        createCategoryDialog().show();
+        createCategoryChooserDialog().show();
     }
 }

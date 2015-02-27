@@ -18,7 +18,7 @@ public class AutoCompleteResult extends Result {
                 JSONArray typesJSON = predictionJSON.getJSONArray("types");
                 String[] types = new String[typesJSON.length()];
                 for (int t = 0; t < types.length; t++) {
-                    types[i] = typesJSON.getString(i);
+                    types[t] = typesJSON.getString(t);
                 }
                 mPredictions.add(
                         new AutocompletePrediction(description, placeID, types)

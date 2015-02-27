@@ -49,7 +49,7 @@ public class BusinessSmallCardRecyclerAdapter extends RecyclerView.Adapter<Busin
                     InputStream in = new java.net.URL(imgUrl).openStream();
                     bitMapImg = BitmapFactory.decodeStream(in);
                 } catch (Exception e) {
-                    Log.w("SmallCardAdapter","Image URL could not be opened");
+                    Log.w("SmallCardAdapter","Image URL could not be opened: "+imgUrl);
                 }
                 return null;
             }

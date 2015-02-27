@@ -1,16 +1,10 @@
 package de.bwirth.mapradar.activity;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
-import android.os.*;
+import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.*;
-import android.widget.*;
-import de.bwirth.mapradar.apputil.YelpQueryHelper;
-import de.bwirth.mapradar.model.Business;
 import de.bwirth.mapradar.provider.*;
 import de.ip.mapradar.R;
-
-import java.util.ArrayList;
 
 /**
  * <code>
@@ -20,14 +14,10 @@ import java.util.ArrayList;
  */
 public class SearchActivity2 extends BaseActivity implements SearchView.OnQueryTextListener,
         SearchView.OnSuggestionListener, View.OnClickListener {
-    YelpQueryHelper helper;
-    private AsyncTask<Void, Void, Void> task;
     private SuggestionsDatabase database;
     private android.support.v7.widget.SearchView mSearchView;
     private boolean mFirstRunActivity = true;
-    private ListView listView;
-    private ArrayList<Business> searchResults;
-    private EditText editText;
+    private SuggestionAdapter mSuggestionsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,11 +46,12 @@ public class SearchActivity2 extends BaseActivity implements SearchView.OnQueryT
             mSearchView.setOnSearchClickListener(this);
             mSearchView.setSubmitButtonEnabled(true);
             mSearchView.setIconified(!mFirstRunActivity);
+            mSuggestionsAdapter = new SuggestionAdapter(this, mSearchView, database);
+            mSearchView.setSuggestionsAdapter(mSuggestionsAdapter);
         }
-        getSuggestions("",5);
+        mSuggestionsAdapter.invalidate();
         return true;
     }
-
 
     @Override
     public boolean onSuggestionSelect(int i) {
@@ -103,25 +94,14 @@ public class SearchActivity2 extends BaseActivity implements SearchView.OnQueryT
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        getSuggestions(newText, 5);
+       if (mSuggestionsAdapter != null) {
+           mSuggestionsAdapter.invalidate();
+       }
         return true;
     }
 
-
-
     @Override
     public void onClick(View v) {
-       mSearchView.setQuery(getSupportActionBar().getTitle(),false);
-    }
-
-    private void getSuggestions(String query, int maxResults) {
-        Cursor cursor = database.getSuggestions(query, maxResults);
-        if (cursor.getCount() != 0) {
-            String[] columns = new String[]{SuggestionsDatabase.FIELD_SUGGESTION};
-            int[] columnTextId = new int[]{android.R.id.text1};
-            SuggestionSimpleCursorAdapter simple = new SuggestionSimpleCursorAdapter(getBaseContext(), mSearchView,
-                    cursor, columns, columnTextId, 0);
-            mSearchView.setSuggestionsAdapter(simple);
-        }
+        mSearchView.setQuery(getSupportActionBar().getTitle(), false);
     }
 }

@@ -3,11 +3,13 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.util.Log;
+import de.bwirth.mapradar.androidutil.AndroidUtil;
+import de.bwirth.mapradar.apputil.ObjectSerializer;
 import de.bwirth.mapradar.model.*;
-import de.ip.mapradar.R;
 import static de.bwirth.mapradar.model.SortingMethod.ALPHABET;
 import static de.bwirth.mapradar.model.SortingMethod.valueOf;
-import de.bwirth.mapradar.apputil.ObjectSerializer;
+import de.bwirth.mapradar.provider.CategoriesDatabase;
+import de.ip.mapradar.R;
 import org.json.*;
 
 import java.io.InputStream;
@@ -52,6 +54,7 @@ public class MapApplication extends Application {
             new Event(new Event.LatLong(49.2, 48.2), "Ludwigsburg", "21. MÄR. 15", "Theater", "ab 9,95€", R.drawable.event_2),
             new Event(new Event.LatLong(49.1, 48.1), "Stuttgart", "30. APR. 15", "Stadtfest", "gratis", R.drawable.event_2),
     };
+    private CategoriesDatabase mCategoryDB;
 
     public Map<String, String> getYelpCategories() {
         return yelpCategories;
@@ -63,6 +66,33 @@ public class MapApplication extends Application {
             return R.drawable.mapradar_weiss;
         }
         return ret;
+    }
+
+    /**
+     * Indizes fit to googlecategory arraylist
+     * @return
+     */
+    public Integer[] getSelectedCategoryIndices(){
+        ArrayList<Integer> result  = new ArrayList<Integer>();
+        String[] googleCategories1 = getGoogleCategories();
+        for (int i = 0; i < googleCategories1.length; i++) {
+            String catName = googleCategories1[i];
+            if (mCategoryDB.isFavourite(catName)) {
+                result.add(i);
+            }
+        }
+        return result.toArray(new Integer[result.size()]);
+    }
+
+    public void setSelectedCategoryIndices(final List<Integer> selectedIndizes) {
+       new AndroidUtil.VoidAsyncTask(){
+           @Override
+           protected void doInBackground() {
+               for (int i = 0; i < googleCategories.length; i++) {
+                   mCategoryDB.insertOrChangeCategory(getGoogleCategories()[i], selectedIndizes.contains(i));
+               }
+           }
+       }.run(true);
     }
 
     public int getCategoryColor(String categoryID) {
@@ -123,7 +153,6 @@ public class MapApplication extends Application {
                 .edit()
                 .putString("transport", prefs.getTransportation().toString())
                 .putString("sort", prefs.getSortingMethod().toString())
-                .putStringSet("selectedcategories", prefs.createStringSet(prefs.getSelectedIndizes()))
                 .apply();
     }
 
@@ -153,6 +182,7 @@ public class MapApplication extends Application {
 
         edit.apply();
     }
+
 
     public final class Preference {
         public void setTransportation(Transportation transportation) {
@@ -184,18 +214,6 @@ public class MapApplication extends Application {
             return (ArrayList<Business>) ObjectSerializer.deserialize(serializedString);
         }
 
-        public Integer[] getSelectedIndizes() {
-            String[] selectedCats = mPref.getStringSet("selected_categories", allIndizes()).toArray(new String[1]);
-            Integer[] selectedIndizes = new Integer[selectedCats.length];
-            for (int i = 0; i < selectedCats.length; i++) {
-                try {
-                    selectedIndizes[i] = Integer.parseInt(selectedCats[i]);
-                } catch (NumberFormatException e) {
-                    selectedIndizes[i] = -1;
-                }
-            }
-            return selectedIndizes;
-        }
 
         private Set<String> allIndizes() {
             int numOfCategories = yelpCategories.size();
@@ -245,7 +263,10 @@ public class MapApplication extends Application {
             Log.e("MapApplication", "could not red json addCategoriesToMap", ex);
             ex.printStackTrace();
         }
+
+        //GOOGLE
         try {
+            mCategoryDB = new CategoriesDatabase(getBaseContext());
             InputStream is = getAssets().open(getString(R.string.file_name_google_categories));
             int size = is.available();
             byte[] buffer = new byte[size];
@@ -256,6 +277,7 @@ public class MapApplication extends Application {
             googleCategories = new String[googleCategoriesJSONArray.length()];
             for (int i = 0; i < googleCategoriesJSONArray.length(); i++) {
                 googleCategories[i] = googleCategoriesJSONArray.getString(i);
+                mCategoryDB.insertIfNotAlready(googleCategories[i]);
                 categoryColorMap.put(googleCategories[i], i < colors.length ? getResources().getColor(colors[i]) : getResources().getColor(R.color.theme_primary));
                 categoryIconMap.put(googleCategories[i], i < icons.length ? icons[i] : R.drawable.mapradar_weiss);
             }

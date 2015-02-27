@@ -57,8 +57,8 @@ dependencies {
     compile 'com.google.api-client:google-api-client-gson:1.17.0-rc' exclude module: 'httpclient'
     compile 'com.google.http-client:google-http-client-android:1.18.0-rc'
 
-    //  Github Libraries
-    compile 'com.afollestad:material-dialogs:0.4.6'
+
+    compile 'com.afollestad:material-dialogs:0.5.0'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.sothree.slidinguppanel:library:2.0.4'
     compile 'com.jpardogo.googleprogressbar:library:1.1.0'

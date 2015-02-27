@@ -52,7 +52,7 @@ public class AndroidUtil {
         /**
          * @param runParallel if set, this asyncTask runs parallel to other AsyncTasks as long as there is enough Threadpool size!!
          */
-        public void run(boolean runParallel) {
+        public final void run(boolean runParallel) {
             if (runParallel) {
                 executeOnExecutor(THREAD_POOL_EXECUTOR);
                 return;

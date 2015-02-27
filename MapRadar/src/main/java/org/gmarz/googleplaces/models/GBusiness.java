@@ -6,16 +6,15 @@ import org.json.*;
 
 public class GBusiness extends Business {
     private PlaceDetails mDetails;
+    public  final String LOG_TAG = getClass().getSimpleName();
 
     public GBusiness(JSONObject jsonPlace) {
         try {
             name = jsonPlace.getString("name");
             id = jsonPlace.getString("id");
             imageURL = jsonPlace.getString("icon");
-            try {
+            if(jsonPlace.has("photos")){
                 photoRef = ((JSONObject) ((JSONArray) jsonPlace.get("photos")).get(0)).getString("photo_reference");
-            } catch (JSONException e) {
-                Log.w("retrieving photo", "no photo found for " + name);
             }
             LATITUDE = jsonPlace.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
             LONGITUDE = jsonPlace.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
@@ -31,10 +30,8 @@ public class GBusiness extends Business {
             if (types != null && types.length() > 0) {
                 category = (String) types.get(0);
             }
-            Log.d("CATEGORYNULL", category);
         } catch (JSONException e) {
-            Log.e("GBUSINESS", "JSONException", e);
-            Log.d("JSONEXCEPTION", jsonPlace.toString());
+            Log.w(LOG_TAG, "Error looking up Google Place "+name, e);
         }
     }
 

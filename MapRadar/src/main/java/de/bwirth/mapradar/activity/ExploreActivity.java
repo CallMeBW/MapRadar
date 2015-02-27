@@ -1,7 +1,6 @@
 package de.bwirth.mapradar.activity;
 import android.app.Activity;
 import android.content.*;
-import android.database.Cursor;
 import android.location.*;
 import android.net.*;
 import android.os.*;
@@ -13,15 +12,17 @@ import android.widget.*;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
+import com.jpardogo.android.googleprogressbar.library.GoogleProgressBar;
 import de.bwirth.mapradar.androidutil.AndroidUtil;
 import de.bwirth.mapradar.apputil.GoogleQueryHelper;
-import de.bwirth.mapradar.model.*;
-import de.bwirth.mapradar.view.*;
-import de.ip.mapradar.R;
 import de.bwirth.mapradar.main.MapApplication;
+import de.bwirth.mapradar.model.*;
 import static de.bwirth.mapradar.model.Transportation.BIKE;
 import static de.bwirth.mapradar.model.Transportation.CAR;
 import static de.bwirth.mapradar.model.Transportation.FOOT;
+import de.bwirth.mapradar.provider.CategoriesDatabase;
+import de.bwirth.mapradar.view.*;
+import de.ip.mapradar.R;
 
 import java.util.*;
 
@@ -43,6 +44,7 @@ public class ExploreActivity extends BaseActivity {
     private Handler mHandler;
     private MenuItem menuFoot, menuBike, menuCar;
     private boolean mSearching;
+    private GoogleProgressBar googleProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class ExploreActivity extends BaseActivity {
         toolbar.setTitle(R.string.title_home);
         locationTitle = (TextView) thisActivity.findViewById(R.id.home_frg_location);
         container = (LinearLayout) findViewById(R.id.frg_home_linearlay);
+        googleProgressBar = (GoogleProgressBar) findViewById(R.id.google_progress);
         ViewGroup curPlaceContainer = (ViewGroup) findViewById(R.id.frg_home_cur_place_container);
         viewDestroyed = false;
         ConnectivityManager connManager = (ConnectivityManager) thisActivity.getSystemService(CONNECTIVITY_SERVICE);
@@ -264,10 +267,18 @@ public class ExploreActivity extends BaseActivity {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }, 1000);
+
+        startActivity(new Intent(this,ExploreActivity.class));
+        finish();
     }
 
+
     private void query(final LatLng loc) {
+        CategoriesDatabase db = new CategoriesDatabase(this);
         for (final String category : MapApplication.getInstance().getGoogleCategories()) {
+            if(!db.isFavourite(category)){
+                continue;
+            }
             new AndroidUtil.VoidAsyncTask() {
                 Business[] businessesFound;
 
@@ -312,7 +323,7 @@ public class ExploreActivity extends BaseActivity {
                     container.addView(header, container.getChildCount() - 1);
                     container.addView(new MultipleCardView(thisActivity, businessesFound), container.getChildCount() - 1);
                 }
-            }.execute();
+            }.run(false);
         }
     }
 

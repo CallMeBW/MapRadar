@@ -1,4 +1,5 @@
 package de.bwirth.mapradar.apputil;
+import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import de.bwirth.mapradar.model.Business;
 import org.gmarz.googleplaces.GooglePlaces;
@@ -15,7 +16,7 @@ import java.io.*;
  * Description:                    <br>
  */
 public class GoogleQueryHelper {
-    private final static String API_KEY = "AIzaSyBamxP_zAHM93Co50vhony9HCrAIPpW83A";
+    private final static String API_KEY = "AIzaSyA1IbiQIiFZms3XsJze3IdrBAm0zkXQl-Q";
     private final static GooglePlaces googlePlaces = new GooglePlaces(API_KEY);;
 
     public static Business[] searchNearby(LatLng location, int radius, String category) {
@@ -31,13 +32,12 @@ public class GoogleQueryHelper {
         return result.getPlaces().toArray(new GBusiness[result.getPlaces().size()]);
     }
 
-    public static AutoCompleteResult getAutocompletePredictions(String searchTerm, int cursorPos, LatLng location){
-        AutocompleteQuery query = new AutocompleteQuery(searchTerm,cursorPos,location);
+    public static AutoCompleteResult getAutocompletePredictions(String searchTerm, int cursorPos){
+        AutocompleteQuery query = new AutocompleteQuery(searchTerm,cursorPos);
         try {
             return googlePlaces.getAutocompletePredictions(query);
-        } catch (JSONException e) {
-            return null;
-        } catch (IOException e) {
+        } catch (JSONException | IOException e) {
+            Log.e("AUTOCOMPLETE","fehler",e);
             return null;
         }
     }
