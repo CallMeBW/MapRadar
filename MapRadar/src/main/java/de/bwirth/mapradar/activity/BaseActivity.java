@@ -1,16 +1,18 @@
 package de.bwirth.mapradar.activity;
 import android.animation.*;
+import android.app.ActionBar;
 import android.content.*;
 import android.graphics.Color;
 import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.*;
-import android.support.v7.app.*;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.*;
 import android.view.*;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.*;
+import android.widget.Toolbar;
 import com.afollestad.materialdialogs.MaterialDialog;
 import de.bwirth.mapradar.apputil.GooglePlacesActivity;
 import de.bwirth.mapradar.main.MapApplication;
@@ -102,7 +104,7 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.registerOnSharedPreferenceChangeListener(this);
 
-        ActionBar ab = getSupportActionBar();
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
@@ -264,7 +266,14 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
         if (isNavDrawerOpen()) {
             closeNavDrawer();
         } else {
-            super.onBackPressed();
+            if(isSpecialItem(getSelfNavDrawerItem()) || getSelfNavDrawerItem() == NAVDRAWER_ITEM_HOME){
+                // if in settings or home activity return to last actiity
+                super.onBackPressed();
+            } else{
+                // go to home activity
+                goToNavDrawerItem(NAVDRAWER_ITEM_HOME);
+            }
+
         }
     }
 
@@ -344,11 +353,15 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
                 .itemsCallbackMultiChoice(selectedIndizes, new MaterialDialog.ListCallbackMulti() {
                     @Override
                     public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
-                        MapApplication.getInstance().setSelectedCategoryIndices(Arrays.asList(integers));
+                        onCategoriesSelected(integers);
                     }
                 })
 
                 .build();
+    }
+
+    protected void onCategoriesSelected(Integer[] integers) {
+        MapApplication.getInstance().setSelectedCategoryIndices(Arrays.asList(integers));
     }
 
     private void goToNavDrawerItem(int item) {

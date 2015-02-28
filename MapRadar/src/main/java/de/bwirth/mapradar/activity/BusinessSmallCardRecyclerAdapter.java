@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
+import de.bwirth.mapradar.apputil.GoogleQueryHelper;
 import de.bwirth.mapradar.model.Business;
 import de.ip.mapradar.R;
 
@@ -35,18 +36,25 @@ public class BusinessSmallCardRecyclerAdapter extends RecyclerView.Adapter<Busin
     public void onBindViewHolder(final ViewHolder vh, int i) {
         Business model = data.get(i);
         vh.vTitle.setText(model.name);
+        vh.vCategory.setText(model.category);
         vh.vRatingBar.setNumStars(5);
         vh.vRatingBar.setRating((float) model.RATING);
         if (vh.vRatingBar.getRating() == 0.0f) {
             vh.vRatingBar.setVisibility(View.INVISIBLE);
         }
         final String imgUrl = String.valueOf(model.imageURL);
+        final String photoRef = String.valueOf(model.photoRef);
         new AsyncTask<Void, Void, Void>() {
             private Bitmap bitMapImg;
 
             protected Void doInBackground(Void... o) {
                 try {
-                    InputStream in = new java.net.URL(imgUrl).openStream();
+                    InputStream in;
+                    if (photoRef == null) {
+                        in = new java.net.URL(imgUrl).openStream();
+                    } else {
+                        in = GoogleQueryHelper.getImgStream(photoRef);
+                    }
                     bitMapImg = BitmapFactory.decodeStream(in);
                 } catch (Exception e) {
                     Log.w("SmallCardAdapter","Image URL could not be opened: "+imgUrl);
@@ -81,13 +89,14 @@ public class BusinessSmallCardRecyclerAdapter extends RecyclerView.Adapter<Busin
     public static class ViewHolder extends RecyclerView.ViewHolder {
         protected RatingBar vRatingBar;
         protected ImageView vImg;
-        protected TextView  vTitle;
+        protected TextView  vTitle,vCategory;
 
         public ViewHolder(View v) {
             super(v);
             vRatingBar = (RatingBar) v.findViewById(R.id.card_ratingbar);
             vImg = (ImageView) v.findViewById(R.id.card_img);
             vTitle = (TextView) v.findViewById(R.id.card_title);
+            vCategory = (TextView) v.findViewById(R.id.card_subtitle);
         }
     }
 

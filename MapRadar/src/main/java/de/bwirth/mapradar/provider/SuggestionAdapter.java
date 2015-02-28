@@ -19,15 +19,17 @@ import java.util.*;
 public class SuggestionAdapter  extends android.support.v4.widget.CursorAdapter {
     private final Context mContext;
     private final android.support.v7.widget.SearchView mSearchView;
+    private final Listener onSuggestionSelectedListener;
     private final SuggestionsDatabase mDatabase;
     private Cursor mRecentQueriesCursor;
     private List<AutocompletePrediction> mGooglePredictions;
     private AndroidUtil.VoidAsyncTask mCurrentTask;
 
-    public SuggestionAdapter(Context context, android.support.v7.widget.SearchView searchView, SuggestionsDatabase db) {
+    public SuggestionAdapter(Context context, android.support.v7.widget.SearchView searchView,Listener onSuggestionSelectedListener,SuggestionsDatabase db) {
         super(context,db.getSuggestions("",0),0);
         mContext = context;
         this.mSearchView = searchView;
+        this.onSuggestionSelectedListener = onSuggestionSelectedListener;
         this.mDatabase = db;
         mGooglePredictions = new ArrayList<>(0);
     }
@@ -106,6 +108,12 @@ public class SuggestionAdapter  extends android.support.v4.widget.CursorAdapter 
                 mSearchView.setQuery(suggestion, false);
             }
         });
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSuggestionSelectedListener.onClickSuggestion(suggestion);
+            }
+        });
         return v;
     }
 
@@ -123,4 +131,6 @@ public class SuggestionAdapter  extends android.support.v4.widget.CursorAdapter 
         TextView textViewItem;
         ImageView arrow;
     }
+
+    public interface Listener {void onClickSuggestion(String suggestion);}
 }

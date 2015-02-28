@@ -45,6 +45,13 @@ public class ExploreActivity extends BaseActivity {
     private MenuItem menuFoot, menuBike, menuCar;
     private boolean mSearching;
     private GoogleProgressBar googleProgressBar;
+    private BusinessSmallCardRecyclerAdapter.OnItemClickListener onCardClickListener = new BusinessSmallCardRecyclerAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClicked(Business busi, View v, int pos) {
+            onCardClick(busi);
+        }
+    };
+    private boolean mMakeNewQuery = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,8 @@ public class ExploreActivity extends BaseActivity {
         setContentView(R.layout.act_explore);
         overridePendingTransition(0, 0);
         mHandler = new Handler();
+        Business[] lastFoundBusis = MapApplication.getInstance().getFoundBusinesses();
+        mMakeNewQuery = lastFoundBusis == null || lastFoundBusis.length == 0;
         mMapFragment = new SupportMapFragment() {
             @Override
             public void onActivityCreated(Bundle savedInstanceState) {
@@ -70,11 +79,14 @@ public class ExploreActivity extends BaseActivity {
         locationTitle = (TextView) thisActivity.findViewById(R.id.home_frg_location);
         container = (LinearLayout) findViewById(R.id.frg_home_linearlay);
         googleProgressBar = (GoogleProgressBar) findViewById(R.id.google_progress);
-        ViewGroup curPlaceContainer = (ViewGroup) findViewById(R.id.frg_home_cur_place_container);
+        tryRemoveProgressBar();
         viewDestroyed = false;
         ConnectivityManager connManager = (ConnectivityManager) thisActivity.getSystemService(CONNECTIVITY_SERVICE);
         final NetworkInfo wifiInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         final NetworkInfo g3Info = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (!mMakeNewQuery) {
+            reuseOldData();
+        }
         if (wifiInfo.isConnected() || g3Info.isConnected()) {
             searchLocationAgain(0, 0);
         } else {
@@ -106,6 +118,40 @@ public class ExploreActivity extends BaseActivity {
                         }
                     });
             builder.build().show();
+        }
+    }
+
+    private void reuseOldData() {
+        final MapApplication mapApp = MapApplication.getInstance();
+        final String[] categories = mapApp.getGoogleCategories();
+        final TitleView[] titleViews = new TitleView[categories.length];
+        final MultipleCardView[] cardViewContainer = new MultipleCardView[categories.length];
+        final Business[] businessesOld = mapApp.getFoundBusinesses();
+
+        for (int i = 0; i < categories.length; i++) {
+            final String currCat = categories[i];
+            titleViews[i] = new TitleView(ExploreActivity.this, currCat, "ALLE", mapApp.getCategoryColor(currCat));
+            cardViewContainer[i] = new MultipleCardView(ExploreActivity.this, onCardClickListener);
+            titleViews[i].getMoreButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent showCategory = new Intent(thisActivity, CategoryActivity.class);
+                    showCategory.putExtra(CategoryActivity.EXTRA_CATEGORYID, currCat); //TODO
+                    showCategory.putExtra(CategoryActivity.EXTRA_CATEGORY, currCat);
+                    startActivity(showCategory);
+                }
+            });
+            ArrayList<Business> fittingBussis = new ArrayList<>();
+            for(Business possibleFittingBusiness : businessesOld){
+                if(possibleFittingBusiness != null && currCat.contains(possibleFittingBusiness.category)){
+                    fittingBussis.add(possibleFittingBusiness);
+                }
+            }
+            cardViewContainer[i].setAdapter(fittingBussis.toArray(new Business[fittingBussis.size()]));
+            if(fittingBussis.size() > 0){
+                container.addView(titleViews[i]);
+                container.addView(cardViewContainer[i]);
+            }
         }
     }
 
@@ -212,7 +258,9 @@ public class ExploreActivity extends BaseActivity {
                 LatLng mylLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mylLatLng, 15));
                 try {
-                    query(mylLatLng);
+                    if (mMakeNewQuery) {
+                        query(mylLatLng);
+                    }
                 } catch (Exception e) {
                     Log.e("HomeFragment", "exception on query", e);
                 }
@@ -252,11 +300,19 @@ public class ExploreActivity extends BaseActivity {
                 createCategoryChooserDialog().show();
                 break;
             case R.id.mnu_explore_search:
-                startActivity(new Intent(this,SearchActivity2.class));
+                startActivity(new Intent(this, SearchActivity2.class));
                 break;
         }
         thisActivity.invalidateOptionsMenu();
         return true;
+    }
+
+    @Override
+    protected void onCategoriesSelected(Integer[] integers) {
+        super.onCategoriesSelected(integers);
+        MapApplication.getInstance().setFoundBusinesses(null);
+        startActivity(new Intent(this, ExploreActivity.class));
+        finish();
     }
 
     @Override
@@ -267,16 +323,45 @@ public class ExploreActivity extends BaseActivity {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }, 1000);
-
-        startActivity(new Intent(this,ExploreActivity.class));
+        MapApplication.getInstance().setFoundBusinesses(null);
+        startActivity(new Intent(this, ExploreActivity.class));
         finish();
     }
 
-
     private void query(final LatLng loc) {
-        CategoriesDatabase db = new CategoriesDatabase(this);
-        for (final String category : MapApplication.getInstance().getGoogleCategories()) {
-            if(!db.isFavourite(category)){
+        final CategoriesDatabase db = new CategoriesDatabase(this);
+        final MapApplication mapApp = MapApplication.getInstance();
+        final String[] categories = mapApp.getGoogleCategories();
+        final TitleView[] titleViews = new TitleView[categories.length];
+        final MultipleCardView[] cardViewContainer = new MultipleCardView[categories.length];
+
+        tryAddProgressBar();
+        for (int i = 0; i < categories.length; i++) {
+            final String cat = categories[i];
+            titleViews[i] = new TitleView(ExploreActivity.this, cat, "Alle", mapApp.getCategoryColor(cat));
+            cardViewContainer[i] = new MultipleCardView(ExploreActivity.this, onCardClickListener);
+            titleViews[i].getMoreButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent showCategory = new Intent(thisActivity, CategoryActivity.class);
+                    showCategory.putExtra(CategoryActivity.EXTRA_CATEGORYID, cat); //TODO
+                    showCategory.putExtra(CategoryActivity.EXTRA_CATEGORY, cat);
+                    startActivity(showCategory);
+                }
+            });
+
+            titleViews[i].setVisibility(View.GONE);
+            cardViewContainer[i].setVisibility(View.GONE);
+            container.addView(titleViews[i]);
+            container.addView(cardViewContainer[i]);
+        }
+
+        final int[] finishedQueriesCount = {0};
+        for (int i = 0; i < categories.length; i++) {
+            finishedQueriesCount[0]++;
+            final String category = categories[i];
+            final int finalI = i;
+            if (!db.isFavourite(category)) {
                 continue;
             }
             new AndroidUtil.VoidAsyncTask() {
@@ -284,7 +369,7 @@ public class ExploreActivity extends BaseActivity {
 
                 @Override
                 protected void doInBackground() {
-                    businessesFound = GoogleQueryHelper.searchNearby(loc,10000,category);
+                    businessesFound = GoogleQueryHelper.searchNearby(loc, 10000, category);
                 }
 
                 @Override
@@ -295,16 +380,8 @@ public class ExploreActivity extends BaseActivity {
                             ) {
                         return;
                     }
-                    TitleView header = new TitleView(thisActivity, category, MapApplication.getInstance().getCategoryColor(category));
-                    header.getMoreButton().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent showCategory = new Intent(thisActivity, CategoryActivity.class);
-                            showCategory.putExtra(CategoryActivity.EXTRA_CATEGORYID, category); //TODO
-                            showCategory.putExtra(CategoryActivity.EXTRA_CATEGORY, category);
-                            startActivity(showCategory);
-                        }
-                    });
+                    TitleView header = titleViews[finalI];
+                    MultipleCardView cardContainer = cardViewContainer[finalI];
                     header.getMapButton().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -320,10 +397,31 @@ public class ExploreActivity extends BaseActivity {
                             startActivity(showMap);
                         }
                     });
-                    container.addView(header, container.getChildCount() - 1);
-                    container.addView(new MultipleCardView(thisActivity, businessesFound), container.getChildCount() - 1);
+                    cardContainer.setAdapter(businessesFound);
+                    cardContainer.setVisibility(View.VISIBLE);
+                    header.setVisibility(View.VISIBLE);
+                    if (finishedQueriesCount[0] == categories.length) {
+                        tryRemoveProgressBar();
+                        mapApp.setFoundBusinesses(businessesFound);
+                    }
                 }
-            }.run(false);
+            }.run(true);
+        }
+    }
+
+    private void tryAddProgressBar() {
+        try {
+            container.addView(googleProgressBar);
+        } catch (Exception e) {
+            Log.e("ExploreActivity", "Could not add googleprogressbar", e);
+        }
+    }
+
+    private void tryRemoveProgressBar() {
+        try {
+            container.removeView(googleProgressBar);
+        } catch (Exception e) {
+            Log.e("ExploreActivity", "Could not add googleprogressbar", e);
         }
     }
 
@@ -341,12 +439,6 @@ public class ExploreActivity extends BaseActivity {
         menuBike.setChecked(curTrans == BIKE);
         menuCar.setChecked(curTrans == CAR);
         return true;
-    }
-
-    @Override
-    public boolean onSearchRequested() {
-        Toast.makeText(this, "onsearchRequested", Toast.LENGTH_LONG).show();
-        return super.onSearchRequested();
     }
 
     @Override
@@ -385,5 +477,4 @@ public class ExploreActivity extends BaseActivity {
         showMap.putExtras(b);
         startActivity(showMap);
     }
-
 }

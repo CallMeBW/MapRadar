@@ -16,13 +16,6 @@ import java.io.InputStream;
 import java.util.*;
 
 public class MapApplication extends Application {
-    private static MapApplication sInstance;
-    public Preference prefs;
-    private SharedPreferences mPref;
-    private YelpAPI api;
-    private String lastKnownLocality;
-    private Location lastKnownLocation;
-    private HashMap<String, Integer> categoryIconMap, categoryColorMap;
     private static final String CONSUMER_KEY = "qD1SlAz3VH8WOf0YlDhJgQ";
     private static final String CONSUMER_SECRET = "OpuRzGSL76QcSNq4_tIxUTASQUU";
     private static final String TOKEN = "4Wkyzbe0bQXBAOapejGZe_9vrRtkrz93";
@@ -47,6 +40,8 @@ public class MapApplication extends Application {
             R.color.lila,
             R.color.rot
     };
+    private static MapApplication sInstance;
+    private static Business[] foundBusinesses;
     public final Event[] sampleEvents = {
             new Event(new Event.LatLong(49.1, 48.6), "Stuttgart", "21. FEB. 15", "Maroon 5", "ab 75€", R.drawable.event_1),
             new Event(new Event.LatLong(49.1, 48.7), "Öhringen", "10. FEB. 15", "Cro", "ab 60€", R.drawable.event_1),
@@ -54,10 +49,22 @@ public class MapApplication extends Application {
             new Event(new Event.LatLong(49.2, 48.2), "Ludwigsburg", "21. MÄR. 15", "Theater", "ab 9,95€", R.drawable.event_2),
             new Event(new Event.LatLong(49.1, 48.1), "Stuttgart", "30. APR. 15", "Stadtfest", "gratis", R.drawable.event_2),
     };
+    public Preference prefs;
+    private SharedPreferences mPref;
+    private YelpAPI api;
+    private String lastKnownLocality;
+    private Location lastKnownLocation;
+    private HashMap<String, Integer> categoryIconMap, categoryColorMap;
     private CategoriesDatabase mCategoryDB;
+    private Map<String, String> yelpCategories;
+    private String[] googleCategories;
 
-    public Map<String, String> getYelpCategories() {
-        return yelpCategories;
+    public  Business[] getFoundBusinesses() {
+        return foundBusinesses;
+    }
+
+    public static void setFoundBusinesses(Business[] foundBusinesses) {
+        MapApplication.foundBusinesses = foundBusinesses;
     }
 
     public int getCategoryIconID(String categoryID) {
@@ -70,10 +77,11 @@ public class MapApplication extends Application {
 
     /**
      * Indizes fit to googlecategory arraylist
+     *
      * @return
      */
-    public Integer[] getSelectedCategoryIndices(){
-        ArrayList<Integer> result  = new ArrayList<Integer>();
+    public Integer[] getSelectedCategoryIndices() {
+        ArrayList<Integer> result = new ArrayList<Integer>();
         String[] googleCategories1 = getGoogleCategories();
         for (int i = 0; i < googleCategories1.length; i++) {
             String catName = googleCategories1[i];
@@ -85,14 +93,18 @@ public class MapApplication extends Application {
     }
 
     public void setSelectedCategoryIndices(final List<Integer> selectedIndizes) {
-       new AndroidUtil.VoidAsyncTask(){
-           @Override
-           protected void doInBackground() {
-               for (int i = 0; i < googleCategories.length; i++) {
-                   mCategoryDB.insertOrChangeCategory(getGoogleCategories()[i], selectedIndizes.contains(i));
-               }
-           }
-       }.run(true);
+        new AndroidUtil.VoidAsyncTask() {
+            @Override
+            protected void doInBackground() {
+                for (int i = 0; i < googleCategories.length; i++) {
+                    mCategoryDB.insertOrChangeCategory(getGoogleCategories()[i], selectedIndizes.contains(i));
+                }
+            }
+        }.run(true);
+    }
+
+    public String[] getGoogleCategories() {
+        return googleCategories;
     }
 
     public int getCategoryColor(String categoryID) {
@@ -116,21 +128,17 @@ public class MapApplication extends Application {
         return null;
     }
 
-    private Map<String, String> yelpCategories;
-
-    public String[] getGoogleCategories() {
-        return googleCategories;
-    }
-
-    private String[] googleCategories;
-
-    public YelpAPI getApi() {
-//        return api;
-        return new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
+    public Map<String, String> getYelpCategories() {
+        return yelpCategories;
     }
 
     public static MapApplication getInstance() {
         return sInstance;
+    }
+
+    public YelpAPI getApi() {
+//        return api;
+        return new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
     }
 
     @Override
@@ -156,93 +164,8 @@ public class MapApplication extends Application {
                 .apply();
     }
 
-    public boolean isFirstRun() {
-        return mPref.getBoolean("is_first_run", true);
-    }
-
-    public Location getLastKnownLocation() {
-        return lastKnownLocation;
-    }
-
-    public void setLastKnownLocation(Location lastKnownLocation) {
-        this.lastKnownLocation = lastKnownLocation;
-    }
-
-    public String getLastKnownLocality() {
-        return lastKnownLocality;
-    }
-
-    public void setLastKnownLocality(String lastKnownLocality) {
-        this.lastKnownLocality = lastKnownLocality;
-    }
-
-    public void setFirstRunned() {
-        SharedPreferences.Editor edit = mPref.edit();
-        edit.putBoolean("is_first_run", false);
-
-        edit.apply();
-    }
-
-
-    public final class Preference {
-        public void setTransportation(Transportation transportation) {
-            mPref
-                    .edit()
-                    .putString("transport", transportation.toString())
-                    .commit(); // absichtlich commit
-        }
-
-        public Transportation getTransportation() {
-            return Transportation.valueOf(mPref.getString("transport", Transportation.FOOT.toString()));
-        }
-
-        public SortingMethod getSortingMethod() {
-            return valueOf(mPref.getString("sort", ALPHABET.toString()));
-        }
-
-        public void setFavourites(ArrayList<Business> favourites) throws Exception {
-            SharedPreferences.Editor editor = mPref.edit();
-            editor.putString("favours", ObjectSerializer.serialize(favourites));
-            editor.apply();
-        }
-
-        public ArrayList<Business> getFavourites() throws Exception {
-            String serializedString = mPref.getString("favours", null);
-            if (serializedString == null) {
-                return new ArrayList<>(0);
-            }
-            return (ArrayList<Business>) ObjectSerializer.deserialize(serializedString);
-        }
-
-
-        private Set<String> allIndizes() {
-            int numOfCategories = yelpCategories.size();
-            Integer[] all = new Integer[numOfCategories];
-            for (int i = 0; i < numOfCategories; i++) {
-                all[i] = i;
-            }
-            return createStringSet(all);
-        }
-
-        private Set<String> createStringSet(Integer[] selectedIndizes) {
-            Set<String> stringSet = new HashSet<>();
-            for (Integer i : selectedIndizes) {
-                if (i != null) {
-                    stringSet.add(Integer.toString(i));
-                }
-            }
-            return stringSet;
-        }
-
-        public void setSelectedIndizes(Integer[] selectedIndizes) {
-            mPref
-                    .edit()
-                    .putStringSet("selectedcategories", createStringSet(selectedIndizes))
-                    .apply();
-        }
-    }
-
     private void loadJSONCategories() {
+        // YELP
         try {
             InputStream is = getAssets().open(getString(R.string.file_name_yelp_categories));
             int size = is.available();
@@ -278,12 +201,71 @@ public class MapApplication extends Application {
             for (int i = 0; i < googleCategoriesJSONArray.length(); i++) {
                 googleCategories[i] = googleCategoriesJSONArray.getString(i);
                 mCategoryDB.insertIfNotAlready(googleCategories[i]);
-                categoryColorMap.put(googleCategories[i], i < colors.length ? getResources().getColor(colors[i]) : getResources().getColor(R.color.theme_primary));
+                categoryColorMap.put(googleCategories[i], i < colors.length ? getResources().getColor(colors[i]) : getResources().getColor(R.color
+                        .theme_primary));
                 categoryIconMap.put(googleCategories[i], i < icons.length ? icons[i] : R.drawable.mapradar_weiss);
             }
         } catch (Exception ex) {
             Log.e("MapApplication", "could not red json addCategoriesToMap", ex);
             ex.printStackTrace();
+        }
+    }
+
+    public boolean isFirstRun() {
+        return mPref.getBoolean("is_first_run", true);
+    }
+
+    public Location getLastKnownLocation() {
+        return lastKnownLocation;
+    }
+
+    public void setLastKnownLocation(Location lastKnownLocation) {
+        this.lastKnownLocation = lastKnownLocation;
+    }
+
+    public String getLastKnownLocality() {
+        return lastKnownLocality;
+    }
+
+    public void setLastKnownLocality(String lastKnownLocality) {
+        this.lastKnownLocality = lastKnownLocality;
+    }
+
+    public void setFirstRunned() {
+        SharedPreferences.Editor edit = mPref.edit();
+        edit.putBoolean("is_first_run", false);
+
+        edit.apply();
+    }
+
+    public final class Preference {
+        public Transportation getTransportation() {
+            return Transportation.valueOf(mPref.getString("transport", Transportation.FOOT.toString()));
+        }
+
+        public void setTransportation(Transportation transportation) {
+            mPref
+                    .edit()
+                    .putString("transport", transportation.toString())
+                    .commit(); // absichtlich commit
+        }
+
+        public SortingMethod getSortingMethod() {
+            return valueOf(mPref.getString("sort", ALPHABET.toString()));
+        }
+
+        public ArrayList<Business> getFavourites() throws Exception {
+            String serializedString = mPref.getString("favours", null);
+            if (serializedString == null) {
+                return new ArrayList<>(0);
+            }
+            return (ArrayList<Business>) ObjectSerializer.deserialize(serializedString);
+        }
+
+        public void setFavourites(ArrayList<Business> favourites) throws Exception {
+            SharedPreferences.Editor editor = mPref.edit();
+            editor.putString("favours", ObjectSerializer.serialize(favourites));
+            editor.apply();
         }
     }
 }

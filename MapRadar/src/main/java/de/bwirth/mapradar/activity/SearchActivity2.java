@@ -1,5 +1,4 @@
 package de.bwirth.mapradar.activity;
-import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.*;
@@ -46,7 +45,13 @@ public class SearchActivity2 extends BaseActivity implements SearchView.OnQueryT
             mSearchView.setOnSearchClickListener(this);
             mSearchView.setSubmitButtonEnabled(true);
             mSearchView.setIconified(!mFirstRunActivity);
-            mSuggestionsAdapter = new SuggestionAdapter(this, mSearchView, database);
+            mSuggestionsAdapter = new SuggestionAdapter(this, mSearchView, new SuggestionAdapter.Listener() {
+                @Override
+                public void onClickSuggestion(String suggestion) {
+                    mSearchView.setQuery(suggestion,false);
+                    collapseSearchView();
+                }
+            }, database);
             mSearchView.setSuggestionsAdapter(mSuggestionsAdapter);
         }
         mSuggestionsAdapter.invalidate();
@@ -54,18 +59,13 @@ public class SearchActivity2 extends BaseActivity implements SearchView.OnQueryT
     }
 
     @Override
-    public boolean onSuggestionSelect(int i) {
-        collapseSearchView();
-        return false;
+    public boolean onSuggestionSelect(int position) {
+        return true;
     }
 
     @Override
     public boolean onSuggestionClick(int position) {
-        SQLiteCursor cursor = (SQLiteCursor) mSearchView.getSuggestionsAdapter().getItem(position);
-        int indexColumnSuggestion = cursor.getColumnIndex(SuggestionsDatabase.FIELD_SUGGESTION);
-        mSearchView.setQuery(cursor.getString(indexColumnSuggestion), false);
-        collapseSearchView();
-        return false;
+        return true;
     }
 
     @Override
