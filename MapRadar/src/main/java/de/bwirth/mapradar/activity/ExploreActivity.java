@@ -1,6 +1,6 @@
 package de.bwirth.mapradar.activity;
 import android.app.Activity;
-import android.content.*;
+import android.content.Intent;
 import android.location.*;
 import android.net.*;
 import android.os.*;
@@ -16,10 +16,7 @@ import com.jpardogo.android.googleprogressbar.library.GoogleProgressBar;
 import de.bwirth.mapradar.androidutil.AndroidUtil;
 import de.bwirth.mapradar.apputil.GoogleQueryHelper;
 import de.bwirth.mapradar.main.MapApplication;
-import de.bwirth.mapradar.model.*;
-import static de.bwirth.mapradar.model.Transportation.BIKE;
-import static de.bwirth.mapradar.model.Transportation.CAR;
-import static de.bwirth.mapradar.model.Transportation.FOOT;
+import de.bwirth.mapradar.model.Business;
 import de.bwirth.mapradar.provider.CategoriesDatabase;
 import de.bwirth.mapradar.view.*;
 import de.ip.mapradar.R;
@@ -38,12 +35,8 @@ public class ExploreActivity extends BaseActivity {
     private LinearLayout container;
     private List<Business> businesses;
     private Activity thisActivity;
-    private MenuItem menuTransport;
     private boolean viewDestroyed;
-    private TextView locationTitle;
     private Handler mHandler;
-    private MenuItem menuFoot, menuBike, menuCar;
-    private boolean mSearching;
     private GoogleProgressBar googleProgressBar;
     private BusinessSmallCardRecyclerAdapter.OnItemClickListener onCardClickListener = new BusinessSmallCardRecyclerAdapter.OnItemClickListener() {
         @Override
@@ -52,12 +45,39 @@ public class ExploreActivity extends BaseActivity {
         }
     };
     private boolean mMakeNewQuery = true;
+    private FrameLayout mMapContainer;
+    private View clickableView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_explore);
         overridePendingTransition(0, 0);
+        setTitle("");
+        mMapContainer = (FrameLayout) findViewById(R.id.map_home_container);
+        final ObservableScrollView scroller = (ObservableScrollView) findViewById(R.id.scrollView);
+        enableFadingActionBar(scroller, 200, getResources().getColor(R.color.theme_primary));
+        clickableView = findViewById(R.id.parallax_click_view);
+        clickableView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ExploreActivity.this, "onclick", Toast.LENGTH_SHORT).show();
+            }
+        });
+//        scroller.setOnTouchListener(new View.OnTouchListener() {
+//            boolean hasMoved =false;
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                float y = event.getY();
+//                return false;
+//            }
+//        });
+        mMapContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ExploreActivity.this, "kkk", Toast.LENGTH_SHORT).show();
+            }
+        });
         mHandler = new Handler();
         Business[] lastFoundBusis = MapApplication.getInstance().getFoundBusinesses();
         mMakeNewQuery = lastFoundBusis == null || lastFoundBusis.length == 0;
@@ -74,9 +94,6 @@ public class ExploreActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.map_home_container, mMapFragment).commit();
         thisActivity = this;
         businesses = new ArrayList<>();
-        android.support.v7.widget.Toolbar toolbar = getActionBarToolbar();
-        toolbar.setTitle(R.string.title_home);
-        locationTitle = (TextView) thisActivity.findViewById(R.id.home_frg_location);
         container = (LinearLayout) findViewById(R.id.frg_home_linearlay);
         googleProgressBar = (GoogleProgressBar) findViewById(R.id.google_progress);
         tryRemoveProgressBar();
@@ -95,9 +112,9 @@ public class ExploreActivity extends BaseActivity {
                     title("Keine Internetverbindung")
                     .content("Sie sind nicht mit dem Internet verbunden. Um die App zu nutzen, benötigen Sie eine Internetverbindung.")
                     .cancelable(false)
-                    .negativeText("Wifi-Einstlg.")
+                    .negativeText("Wifi-Einstellungen")
                     .positiveText("Erneut versuchen")
-                    .callback(new MaterialDialog.Callback() {
+                    .callback(new MaterialDialog.ButtonCallback() {
                         @Override
                         public void onNegative(MaterialDialog materialDialog) {
                             startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
@@ -142,13 +159,16 @@ public class ExploreActivity extends BaseActivity {
                 }
             });
             ArrayList<Business> fittingBussis = new ArrayList<>();
-            for(Business possibleFittingBusiness : businessesOld){
-                if(possibleFittingBusiness != null && currCat.contains(possibleFittingBusiness.category)){
+            for (Business possibleFittingBusiness : businessesOld) {
+                if (currCat.contains(possibleFittingBusiness.category)) {
                     fittingBussis.add(possibleFittingBusiness);
+                    Log.i("POSFIT", "fitted: " + possibleFittingBusiness.category + " into " + currCat);
+                } else {
+                    Log.i("POSFIT", possibleFittingBusiness.category + " didn't fit into " + currCat);
                 }
             }
             cardViewContainer[i].setAdapter(fittingBussis.toArray(new Business[fittingBussis.size()]));
-            if(fittingBussis.size() > 0){
+            if (fittingBussis.size() > 0) {
                 container.addView(titleViews[i]);
                 container.addView(cardViewContainer[i]);
             }
@@ -158,6 +178,7 @@ public class ExploreActivity extends BaseActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Toast.makeText(this, "onDestroy Explore Activity", Toast.LENGTH_SHORT);
         //todo use destroy
         viewDestroyed = true;
     }
@@ -204,27 +225,19 @@ public class ExploreActivity extends BaseActivity {
                         matDialog.title("Standort nicht gefunden")
                                 .content("Ihr Standort konnte nicht ermittelt werden.\nBitte aktivieren Sie GPS und WLAN und starten Sie die App " +
                                         "erneut.")
-                                .positiveText("Erneut versuchen")
-                                .negativeText("GPS einschalten")
+                                .positiveText("GPS einschalten")
+                                .negativeText("Erneut versuchen")
                                 .cancelable(false)
-                                .forceStacking(true)
-                                .dismissListener(new DialogInterface.OnDismissListener() {
-                                    @Override
-                                    public void onDismiss(DialogInterface dialog) {
-                                        locationTitle = (TextView) thisActivity.findViewById(R.id.home_frg_location);
-                                        locationTitle.setText("");
-                                    }
-                                })
-                                .callback(new MaterialDialog.Callback() {
+                                .callback(new MaterialDialog.ButtonCallback() {
                                     @Override
                                     public void onPositive(MaterialDialog materialDialog) {
-                                        searchLocationAgain(0, 0);
+                                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                                        matDialog.build().show();
                                     }
 
                                     @Override
                                     public void onNegative(MaterialDialog materialDialog) {
-                                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                                        matDialog.build().show();
+                                        searchLocationAgain(0, 0);
                                     }
                                 })
                                 .build().show();
@@ -274,6 +287,7 @@ public class ExploreActivity extends BaseActivity {
         mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         mMap.getUiSettings().setAllGesturesEnabled(false);
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -285,17 +299,21 @@ public class ExploreActivity extends BaseActivity {
     }
 
     @Override
+    protected void onContentScrolled(float percentage, int newY) {
+        setTitle("MapRadar");
+        mMapContainer.setPadding(0, 0, 0, (int) (percentage * 300));
+        ViewGroup.LayoutParams params = clickableView.getLayoutParams();
+        if(newY <= 360){
+            params.height = 360 - newY; // TODO convert to dp
+        }
+        clickableView.setLayoutParams(params);
+        getTitleView().setAlpha(percentage);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         MapApplication.Preference mapAppPref = MapApplication.getInstance().prefs;
         switch (item.getItemId()) {
-            case R.id.mnu_transport_foot:
-                mapAppPref.setTransportation(FOOT);
-                Toast.makeText(thisActivity, "Zu Fuß unterwgs", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.mnu_transport_car:
-                mapAppPref.setTransportation(CAR);
-                Toast.makeText(thisActivity, "Mit dem Auto unterwegs", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.mnu_filter_categories:
                 createCategoryChooserDialog().show();
                 break;
@@ -332,13 +350,15 @@ public class ExploreActivity extends BaseActivity {
         final CategoriesDatabase db = new CategoriesDatabase(this);
         final MapApplication mapApp = MapApplication.getInstance();
         final String[] categories = mapApp.getGoogleCategories();
+        final String[] categoryNames = mapApp.getGoogleCategoryNames();
         final TitleView[] titleViews = new TitleView[categories.length];
         final MultipleCardView[] cardViewContainer = new MultipleCardView[categories.length];
 
         tryAddProgressBar();
         for (int i = 0; i < categories.length; i++) {
             final String cat = categories[i];
-            titleViews[i] = new TitleView(ExploreActivity.this, cat, "Alle", mapApp.getCategoryColor(cat));
+            final String categoryName = categoryNames[i];
+            titleViews[i] = new TitleView(ExploreActivity.this, categoryName, "Alle", mapApp.getCategoryColor(cat));
             cardViewContainer[i] = new MultipleCardView(ExploreActivity.this, onCardClickListener);
             titleViews[i].getMoreButton().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -356,30 +376,33 @@ public class ExploreActivity extends BaseActivity {
             container.addView(cardViewContainer[i]);
         }
 
-        final int[] finishedQueriesCount = {0};
+        final int[] finishedQueriesCount = {0, categories.length};
+        final ArrayList<Business> allBusinessesFound = new ArrayList<>(50);
         for (int i = 0; i < categories.length; i++) {
-            finishedQueriesCount[0]++;
             final String category = categories[i];
             final int finalI = i;
             if (!db.isFavourite(category)) {
+                finishedQueriesCount[1]--;
                 continue;
             }
             new AndroidUtil.VoidAsyncTask() {
-                Business[] businessesFound;
+                Business[] businessesForCurCat;
 
                 @Override
                 protected void doInBackground() {
-                    businessesFound = GoogleQueryHelper.searchNearby(loc, 10000, category);
+                    businessesForCurCat = GoogleQueryHelper.searchNearby(loc, 10000, category);
                 }
 
                 @Override
                 protected void onPostExecute() {
-                    if (businessesFound == null
-                            || businessesFound.length == 0
+                    finishedQueriesCount[0]++;
+                    if (businessesForCurCat == null
+                            || businessesForCurCat.length == 0
                             || viewDestroyed
                             ) {
                         return;
                     }
+                    allBusinessesFound.addAll(Arrays.asList(businessesForCurCat));
                     TitleView header = titleViews[finalI];
                     MultipleCardView cardContainer = cardViewContainer[finalI];
                     header.getMapButton().setOnClickListener(new View.OnClickListener() {
@@ -387,22 +410,22 @@ public class ExploreActivity extends BaseActivity {
                         public void onClick(View v) {
                             Intent showMap = new Intent(thisActivity, DetailBusinessActivity.class);
                             showMap
-                                    .putExtra("BusiCount", businessesFound.length)
+                                    .putExtra("BusiCount", businessesForCurCat.length)
                                     .putExtra(DetailBusinessActivity.EXTRA_TITLE, category)
                                     .putExtra(DetailBusinessActivity.EXTRA_SELECT_FIRST, false);
-                            for (int i = 0; i < businessesFound.length; i++) {
-                                Business busiToShow = businessesFound[i];
+                            for (int i = 0; i < businessesForCurCat.length; i++) {
+                                Business busiToShow = businessesForCurCat[i];
                                 showMap.putExtra("busi" + i, busiToShow.makeParcel());
                             }
                             startActivity(showMap);
                         }
                     });
-                    cardContainer.setAdapter(businessesFound);
+                    cardContainer.setAdapter(businessesForCurCat);
                     cardContainer.setVisibility(View.VISIBLE);
                     header.setVisibility(View.VISIBLE);
-                    if (finishedQueriesCount[0] == categories.length) {
+                    if (finishedQueriesCount[0] == finishedQueriesCount[1]) {
                         tryRemoveProgressBar();
-                        mapApp.setFoundBusinesses(businessesFound);
+                        mapApp.setFoundBusinesses(allBusinessesFound.toArray(new Business[allBusinessesFound.size()]));
                     }
                 }
             }.run(true);
@@ -428,34 +451,13 @@ public class ExploreActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.explore, menu);
-        Transportation curTrans = MapApplication.getInstance().prefs.getTransportation();
-        menuTransport = menu.findItem(R.id.mnu_transport);
-        menuTransport = menu.findItem(R.id.mnu_transport);
-        menuFoot = menu.findItem(R.id.mnu_transport);
-        menuBike = menu.findItem(R.id.mnu_transport);
-        menuCar = menu.findItem(R.id.mnu_transport);
-        menuTransport.setIcon(createTransportationIcon());
-        menuFoot.setChecked(curTrans == FOOT);
-        menuBike.setChecked(curTrans == BIKE);
-        menuCar.setChecked(curTrans == CAR);
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menuTransport = menu.findItem(R.id.mnu_transport);
-        menuTransport.setIcon(createTransportationIcon());
         return true;
-    }
-
-    private int createTransportationIcon() {
-        Transportation curr = MapApplication.getInstance().prefs.getTransportation();
-        return curr == FOOT
-                ? R.drawable.ic_tb_person_white
-                : curr == BIKE
-                ? R.drawable.ic_tb_bike_white
-                : R.drawable.ic_tb_car_white;
     }
 
     public void onCardClick(Business b) {

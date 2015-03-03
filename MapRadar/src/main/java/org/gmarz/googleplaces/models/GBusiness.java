@@ -11,7 +11,7 @@ public class GBusiness extends Business {
     public GBusiness(JSONObject jsonPlace) {
         try {
             name = jsonPlace.getString("name");
-            id = jsonPlace.getString("id");
+            id = jsonPlace.getString("place_id");
             imageURL = jsonPlace.getString("icon");
             if(jsonPlace.has("photos")){
                 photoRef = ((JSONObject) ((JSONArray) jsonPlace.get("photos")).get(0)).getString("photo_reference");

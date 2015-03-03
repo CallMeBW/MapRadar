@@ -1,13 +1,11 @@
 
 <ScrollView
         xmlns:android = "http://schemas.android.com/apk/res/android"
-
         android:layout_width = "@dimen/navdrawer_width"
         android:layout_height = "match_parent"
         android:layout_gravity = "start"
         android:id = "@+id/navdrawer_base"
         android:background = "@android:color/white"
-        android:fitsSystemWindows = "true"
         >
 
     <LinearLayout

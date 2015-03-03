@@ -1,7 +1,6 @@
 package de.bwirth.mapradar.activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.*;
 import de.bwirth.mapradar.main.MapApplication;
 import de.bwirth.mapradar.model.Event;
@@ -19,8 +18,7 @@ public class EventsActivity extends BaseActivity {
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.act_events);
-        Toolbar toolbar =  getActionBarToolbar();
-        toolbar.setTitle(R.string.title_events);
+        setTitle(R.string.title_events);
         ViewGroup container = (ViewGroup) findViewById(R.id.frg_events_container);
         for (final Event ev : MapApplication.getInstance().sampleEvents) {
             EventView eventView = new EventView(this, ev);

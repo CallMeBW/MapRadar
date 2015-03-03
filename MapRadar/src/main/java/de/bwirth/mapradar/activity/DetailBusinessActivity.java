@@ -14,10 +14,10 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.*;
-import de.bwirth.mapradar.model.Business;
-import de.ip.mapradar.*;
 import de.bwirth.mapradar.androidutil.AndroidUtil;
 import de.bwirth.mapradar.main.MapApplication;
+import de.bwirth.mapradar.model.Business;
+import de.ip.mapradar.R;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -45,6 +45,12 @@ public class DetailBusinessActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
+//        setTaskDescription(new ActivityManager.TaskDescription("Activity 2",bmp,getResources().getColor(R.color.theme_primary)));
+
+
+
         setContentView(R.layout.act_detail_busi);
         final View toolBar = findViewById(R.id.sliding_toolbar);
         setSupportActionBar((android.support.v7.widget.Toolbar) toolBar);

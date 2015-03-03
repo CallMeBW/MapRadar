@@ -1,6 +1,5 @@
 package de.bwirth.mapradar.activity;
 import android.animation.*;
-import android.app.ActionBar;
 import android.content.*;
 import android.graphics.Color;
 import android.os.*;
@@ -8,11 +7,11 @@ import android.preference.PreferenceManager;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.*;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.*;
+import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.*;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.*;
-import android.widget.Toolbar;
 import com.afollestad.materialdialogs.MaterialDialog;
 import de.bwirth.mapradar.apputil.GooglePlacesActivity;
 import de.bwirth.mapradar.main.MapApplication;
@@ -27,6 +26,7 @@ import java.util.*;
 public abstract class BaseActivity extends ActionBarActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     // Navigation drawer:
     private DrawerLayout mDrawerLayout;
+    private TextView titleView;
     private ObjectAnimator mStatusBarColorAnimator;
     private ViewGroup mDrawerItemsListContainer;
     private Handler mHandler;
@@ -95,15 +95,21 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
     private int mNormalStatusBarColor;
     private int mProgressBarTopWhenActionBarShown;
     private static final TypeEvaluator ARGB_EVALUATOR = new ArgbEvaluator();
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHandler = new Handler();
 
+        Window window = getWindow();
+//        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+//                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        mHandler = new Handler();
+        mToast= new Toast(this);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.registerOnSharedPreferenceChangeListener(this);
-
+//        getActionBarToolbar();
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
@@ -116,6 +122,7 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
     private void trySetupSwipeRefresh() {
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         if (mSwipeRefreshLayout != null) {
+//            mSwipeRefreshLayout.setcol
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
@@ -152,11 +159,13 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
         int selfItem = getSelfNavDrawerItem();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (mDrawerLayout == null) {
             return;
         }
         mDrawerLayout.setStatusBarBackgroundColor(
-                getResources().getColor(R.color.theme_primary700));
+                getResources().getColor(R.color.theme_primary));
+
         ScrollView navDrawer = (ScrollView)
                 mDrawerLayout.findViewById(R.id.navdrawer_base);
         if (selfItem == NAVDRAWER_ITEM_INVALID) {
@@ -181,6 +190,7 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
         mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerClosed(View drawerView) {
+
                 // run deferred action, if we have one
                 if (mOnDrawerClosedRunnable != null) {
                     mOnDrawerClosedRunnable.run();
@@ -191,6 +201,7 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
 
             @Override
             public void onDrawerOpened(View drawerView) {
+
                 onNavDrawerStateChanged(true, false);
             }
 
@@ -227,9 +238,6 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
 
     // Subclasses can override this for custom behavior
     protected void onNavDrawerStateChanged(boolean isOpen, boolean isAnimating) {
-        if (mActionBarAutoHideEnabled && isOpen) {
-            autoShowOrHideActionBar(true);
-        }
     }
 
     protected void onNavDrawerSlide(float offset) {
@@ -266,14 +274,13 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
         if (isNavDrawerOpen()) {
             closeNavDrawer();
         } else {
-            if(isSpecialItem(getSelfNavDrawerItem()) || getSelfNavDrawerItem() == NAVDRAWER_ITEM_HOME){
+            if (isSpecialItem(getSelfNavDrawerItem()) || getSelfNavDrawerItem() == NAVDRAWER_ITEM_HOME) {
                 // if in settings or home activity return to last actiity
                 super.onBackPressed();
-            } else{
+            } else {
                 // go to home activity
                 goToNavDrawerItem(NAVDRAWER_ITEM_HOME);
             }
-
         }
     }
 
@@ -343,7 +350,7 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
     }
 
     protected MaterialDialog createCategoryChooserDialog() {
-        String[] caz = MapApplication.getInstance().getGoogleCategories();
+        String[] caz = MapApplication.getInstance().getGoogleCategoryNames();
         final Integer[] selectedIndizes = MapApplication.getInstance().getSelectedCategoryIndices();
         return new MaterialDialog.Builder(this)
                 .items(caz)
@@ -427,43 +434,70 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
         mDrawerLayout.closeDrawer(Gravity.START);
     }
 
-    /**
-     * Initializes the Action Bar auto-hide (aka Quick Recall) effect.
-     */
-    private void initActionBarAutoHide() {
-        mActionBarAutoHideEnabled = true;
-        mActionBarAutoHideMinY = getResources().getDimensionPixelSize(
-                R.dimen.action_bar_auto_hide_min_y);
-        mActionBarAutoHideSensivity = getResources().getDimensionPixelSize(
-                R.dimen.action_bar_auto_hide_sensivity);
+    protected void toast(Object msg,boolean isLong){
+        mToast.cancel();
+        mToast = Toast.makeText(this,String.valueOf(msg),isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
+        mToast.show();
+    }
+
+    protected void enableFadingActionBar(RecyclerView recyclerView, int offsetDP, int resolvedColor) {
+        final int[] scrollOffsetXY = {0, 0};
+        final float elevation = getActionBarToolbar().getElevation();
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        final float logicalDensity = metrics.density;
+        final float whole = offsetDP * logicalDensity;
+        final int[] rgb = {Color.red(resolvedColor), Color.green(resolvedColor), Color.blue(resolvedColor)};
+        getActionBarToolbar().setBackgroundColor(Color.argb(0, rgb[0], rgb[1], rgb[2]));
+
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                scrollOffsetXY[1] += dy;
+                float percentage = (float) scrollOffsetXY[1] / whole;
+                percentage = Math.min(percentage, 1);
+                percentage = Math.max(percentage, 0);
+                getActionBarToolbar().setBackgroundColor(Color.argb((int) (255 * percentage), rgb[0], rgb[1], rgb[2]));
+                getActionBarToolbar().setElevation(elevation);
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
+    }
+
+    protected void enableFadingActionBar(ObservableScrollView scrollView, int offsetDP, int resolvedColor) {
+        final String title = getTitle().toString();
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        final float logicalDensity = metrics.density;
+        final float whole = offsetDP * logicalDensity;
+        final int[] rgb = {Color.red(resolvedColor), Color.green(resolvedColor), Color.blue(resolvedColor)};
+        getActionBarToolbar().setBackgroundColor(Color.argb(0, rgb[0], rgb[1], rgb[2]));
+        setTitle("");
+
+        scrollView.setScrollViewListener(new ObservableScrollView.ScrollViewListener() {
+            @Override
+            public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
+                float percentage = (float) y / whole;
+                percentage = Math.min(percentage, 1);
+                percentage = Math.max(percentage, 0);
+                getActionBarToolbar().setBackgroundColor(Color.argb((int) (255 * percentage), rgb[0], rgb[1], rgb[2]));
+                onContentScrolled(percentage,y);
+            }
+        });
     }
 
     /**
-     * Indicates that the main content has scrolled (for the purposes of showing/hiding
-     * the action bar for the "action bar auto hide" effect). currentY and deltaY may be exact
-     * (if the underlying view supports it) or may be approximate indications:
-     * deltaY may be INT_MAX to mean "scrolled forward indeterminately" and INT_MIN to mean
-     * "scrolled backward indeterminately".  currentY may be 0 to mean "somewhere close to the
-     * start of the list" and INT_MAX to mean "we don't know, but not at the start of the list"
+     * Gets called if you have set enableFadingActionBar
+     *
+     * @param percentage How many pixels the content has scrolled in relative to the offset specified in enableFadingActionBar
      */
-    private void onMainContentScrolled(int currentY, int deltaY) {
-        if (deltaY > mActionBarAutoHideSensivity) {
-            deltaY = mActionBarAutoHideSensivity;
-        } else if (deltaY < -mActionBarAutoHideSensivity) {
-            deltaY = -mActionBarAutoHideSensivity;
-        }
+    protected void onContentScrolled(float percentage, int newY) {
 
-        if (Math.signum(deltaY) * Math.signum(mActionBarAutoHideSignal) < 0) {
-            // deltaY is a motion opposite to the accumulated signal, so reset signal
-            mActionBarAutoHideSignal = deltaY;
-        } else {
-            // add to accumulated signal
-            mActionBarAutoHideSignal += deltaY;
-        }
-
-        boolean shouldShow = currentY < mActionBarAutoHideMinY ||
-                (mActionBarAutoHideSignal <= -mActionBarAutoHideSensivity);
-        autoShowOrHideActionBar(shouldShow);
     }
 
     protected android.support.v7.widget.Toolbar getActionBarToolbar() {
@@ -471,34 +505,29 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
             mActionBarToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_actionbar);
             if (mActionBarToolbar != null) {
                 setSupportActionBar(mActionBarToolbar);
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+                titleView = (TextView) findViewById(R.id.toolbar_title);
+                setTitle(getTitle());
             }
         }
         return mActionBarToolbar;
     }
 
-    protected void autoShowOrHideActionBar(boolean show) {
-        if (show == mActionBarShown) {
-            return;
+    @Override
+    public void setTitle(CharSequence title) {
+        if (getActionBarToolbar() != null) {
+            if (titleView == null) {
+                getActionBarToolbar().setTitle(title);
+            } else {
+                titleView.setText(title);
+            }
         }
-
-        mActionBarShown = show;
-        onActionBarAutoShowOrHide(show);
+        //        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
+//        setTaskDescription(new ActivityManager.TaskDescription("Activity 2",bmp,getResources().getColor(R.color.theme_primary)));
     }
 
-    protected void enableActionBarAutoHide(final RecyclerView listView) {
-        initActionBarAutoHide();
-        listView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView view, int scrollState) {
-            }
-
-            @Override
-            public void onScrolled(RecyclerView view, int dx, int dy) {
-                onMainContentScrolled(Integer.MAX_VALUE, Integer.MAX_VALUE
-                );
-                onActionBarAutoShowOrHide(false);
-            }
-        });
+    protected TextView getTitleView() {
+        return titleView;
     }
 
     private View makeNavDrawerItem(final int itemId, ViewGroup container) {
@@ -571,18 +600,6 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
                 getResources().getColor(R.color.navdrawer_icon_tint));
     }
 
-    protected void registerHideableHeaderView(View hideableHeaderView) {
-        if (!mHideableHeaderViews.contains(hideableHeaderView)) {
-            mHideableHeaderViews.add(hideableHeaderView);
-        }
-    }
-
-    protected void deregisterHideableHeaderView(View hideableHeaderView) {
-        if (mHideableHeaderViews.contains(hideableHeaderView)) {
-            mHideableHeaderViews.remove(hideableHeaderView);
-        }
-    }
-
     public void setNormalStatusBarColor(int color) {
         mNormalStatusBarColor = color;
         if (mDrawerLayout != null) {
@@ -601,7 +618,7 @@ public abstract class BaseActivity extends ActionBarActivity implements SharedPr
                 shown ? mNormalStatusBarColor : Color.BLACK)
                 .setDuration(250);
         if (mDrawerLayout != null) {
-            mStatusBarColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            mStatusBarColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(){
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     ViewCompat.postInvalidateOnAnimation(mDrawerLayout);

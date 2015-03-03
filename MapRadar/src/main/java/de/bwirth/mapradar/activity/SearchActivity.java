@@ -30,8 +30,7 @@ public class SearchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_search);
         overridePendingTransition(0,0);
-        final android.support.v7.widget.Toolbar toolbar = getActionBarToolbar();
-        toolbar.setTitle("In Umgebung finden");
+        setTitle("In Umgebung finden");
 
         editText = (EditText) findViewById(R.id.et_location);
         final Button butonFind = (Button) findViewById(R.id.btn_find);

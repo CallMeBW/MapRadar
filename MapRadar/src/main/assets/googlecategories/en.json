@@ -1,0 +1,22 @@
+{
+  "types": [
+    ["bakery|cafe|meal_takeaway|meal_delivery|restaurant|food", "Food"],
+    ["atm|bank|finance",                                        "financial concerns"],
+   ["bar|night_club","Bars"],
+   ["beauty_salon|hair_care|spa","Beauty"],
+   ["car_dealer|car_repair|car_rental|car_wash|gas_station","Car"],
+   ["church|synagogue|place_of_worship|mosque|cemetery","Religious Places"],
+   ["physiotherapist|doctor|dentist","Doctor"],
+   ["establishment","Establishments"],
+   ["movie_rental|movie_theater","Movie Industry"],
+   ["lodging","Lodging"],
+   ["park|museum|amusement_park|casino","Leisure Activities"],
+   ["parking|rv_park|campground","Camping"],
+   ["pharmacy|health|hospital|gym","Health"],
+   ["post_office|travel_agency|laundry|library|courthouse|florist|city_hall","Local Establishments"],
+   ["school|university","Education"],
+   ["aquarium|pet_store|zoo|veterinary_care","Animals"],
+   ["jewelry_store|liquor_store|shoe_store|shopping_mall|store|book_store|bicycle_store|furniture_store|electronics_store|department_store|clothing_store|home_goods_store|hardware_store|grocery_or_supermarket","Shopping"],
+   ["taxi_stand|train_station|subway_station|bus_station","Transport"]
+  ]
+}

@@ -30,9 +30,7 @@ public class GooglePlacesActivity extends BaseActivity implements BusinessDetail
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_favs_recycler);
         overridePendingTransition(0, 0);
-        final Toolbar toolbar = getActionBarToolbar();
-
-        toolbar.setTitle("Google Places API");
+        setTitle("Google Places API");
 
         final RecyclerView recList = (RecyclerView) findViewById(R.id.favslist_recyclerview);
         recList.setHasFixedSize(true);
@@ -41,7 +39,6 @@ public class GooglePlacesActivity extends BaseActivity implements BusinessDetail
         recList.setLayoutManager(llm);
         recList.setItemViewCacheSize(20);
         restoreInstance(savedInstanceState, recList);
-        enableActionBarAutoHide(recList);
     }
 
     private void fetchPlaces(final RecyclerView recList) {

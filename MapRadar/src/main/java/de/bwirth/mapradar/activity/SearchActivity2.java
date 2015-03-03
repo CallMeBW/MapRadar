@@ -24,7 +24,7 @@ public class SearchActivity2 extends BaseActivity implements SearchView.OnQueryT
         setContentView(R.layout.act_search2);
         overridePendingTransition(0, 0);
         final android.support.v7.widget.Toolbar toolbar = getActionBarToolbar();
-        toolbar.setTitle("");
+        setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         database = new SuggestionsDatabase(this);

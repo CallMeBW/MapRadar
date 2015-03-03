@@ -58,6 +58,7 @@ public class MapApplication extends Application {
     private CategoriesDatabase mCategoryDB;
     private Map<String, String> yelpCategories;
     private String[] googleCategories;
+    private String[] googleCategoryStrings;
 
     public  Business[] getFoundBusinesses() {
         return foundBusinesses;
@@ -152,7 +153,6 @@ public class MapApplication extends Application {
         prefs = new Preference();
         api = new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
         yelpCategories = new LinkedHashMap<>(22);
-        googleCategories = new String[96];
         categoryColorMap = new HashMap<>(22);
         categoryIconMap = new HashMap<>(22);
         loadJSONCategories();
@@ -190,7 +190,7 @@ public class MapApplication extends Application {
         //GOOGLE
         try {
             mCategoryDB = new CategoriesDatabase(getBaseContext());
-            InputStream is = getAssets().open(getString(R.string.file_name_google_categories));
+            InputStream is = getAssets().open("googlecategories/"+getString(R.string.file_name_google_categories));
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -198,8 +198,11 @@ public class MapApplication extends Application {
             String json = new String(buffer, "UTF-8");
             JSONArray googleCategoriesJSONArray = new JSONObject(json).getJSONArray("types");
             googleCategories = new String[googleCategoriesJSONArray.length()];
+            googleCategoryStrings = new String[googleCategoriesJSONArray.length()];
             for (int i = 0; i < googleCategoriesJSONArray.length(); i++) {
-                googleCategories[i] = googleCategoriesJSONArray.getString(i);
+                JSONArray mapTypeAndString = googleCategoriesJSONArray.getJSONArray(i);
+                googleCategories[i] = mapTypeAndString.getString(0);
+                googleCategoryStrings[i] = mapTypeAndString.getString(1);
                 mCategoryDB.insertIfNotAlready(googleCategories[i]);
                 categoryColorMap.put(googleCategories[i], i < colors.length ? getResources().getColor(colors[i]) : getResources().getColor(R.color
                         .theme_primary));
@@ -236,6 +239,10 @@ public class MapApplication extends Application {
         edit.putBoolean("is_first_run", false);
 
         edit.apply();
+    }
+
+    public String[] getGoogleCategoryNames() {
+        return googleCategoryStrings;
     }
 
     public final class Preference {

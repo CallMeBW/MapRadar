@@ -16,7 +16,7 @@ import java.io.*;
  * Description:                    <br>
  */
 public class GoogleQueryHelper {
-    private final static String API_KEY = "AIzaSyA1IbiQIiFZms3XsJze3IdrBAm0zkXQl-Q";
+    private final static String API_KEY = "AIzaSyDbcwwUps6cQLFk2TTPuv1NlLHpjRUZH1Y";
     private final static GooglePlaces googlePlaces = new GooglePlaces(API_KEY);;
 
     public static Business[] searchNearby(LatLng location, int radius, String category) {

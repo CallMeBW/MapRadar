@@ -23,10 +23,11 @@ public class FavouritesActivity extends BaseActivity implements BusinessDetailCa
         overridePendingTransition(0, 0);
         final Toolbar toolbar = getActionBarToolbar();
 
-        toolbar.setTitle("Favoriten");
+        setTitle("Favoriten");
 
 
         RecyclerView recList = (RecyclerView) findViewById(R.id.favslist_recyclerview);
+//        enableFadingActionBar(recList,100,getResources().getColor(R.color.theme_primary));
         recList.setHasFixedSize(true);
         GridLayoutManager llm = new GridLayoutManager(this,getResources().getInteger(R.integer.favs_grid_col_count),GridLayoutManager.VERTICAL,false);
         recList.setLayoutManager(llm);
